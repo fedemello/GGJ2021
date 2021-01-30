@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5667388473058228985}
   - component: {fileID: 5667388473058228990}
   - component: {fileID: 5667388473058228984}
-  - component: {fileID: 385885496121220310}
+  - component: {fileID: 2132229439994423398}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Untagged
@@ -96,10 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e69a42ef7538b6439aad5c29605b9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _triggersPassed: 0
   line: 0
   canBePressed: 0
   inputTriggered: 0
---- !u!61 &385885496121220310
+  _state: 0
+--- !u!61 &2132229439994423398
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,16 +114,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 12.5}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 12, y: 25}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 8, y: 25}
   m_EdgeRadius: 0
