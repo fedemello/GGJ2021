@@ -58,14 +58,17 @@ public class CProcessInput
                 }
                 bool leftInput = (bool)aValues;
 
-                if (leftInput)
-                {
+                bool enemyInput = enemy.currentEye();
 
-                }
-                else
+                if (leftInput == enemyInput)
                 {
-
+                    // If last eye.
+                    if (enemy.popEye())
+                    {
+                        enemy.Killed();
+                    }
                 }
+
                 break;
 
             case CSingingStage.DEVICE_JOYSTICK:

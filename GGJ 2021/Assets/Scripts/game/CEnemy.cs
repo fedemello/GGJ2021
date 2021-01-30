@@ -10,9 +10,13 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public int _line;
     public int _pitch;
-    private int _leftEye;
-    private int _middleEye;
-    private int _rightEye;
+
+    private bool _leftEye;
+    private bool _middleEye;
+    private bool _rightEye;
+
+    private int mCurrentEye = 1;
+
     private bool _rightStick = false;
 
     private int _pace = 0; // de momento null
@@ -29,9 +33,9 @@ public class CEnemy : MonoBehaviour, ITriggered
     
     private void Awake() 
     {
-        _leftEye = Random.Range(0,2);
-        _middleEye = Random.Range(0,2);
-        _rightEye = Random.Range(0,2);
+        _leftEye = (Random.value > 0.5f);
+        _middleEye = (Random.value > 0.5f);
+        _rightEye = (Random.value > 0.5f);
 
         float right = Random.value;
 
@@ -97,9 +101,42 @@ public class CEnemy : MonoBehaviour, ITriggered
         _activeCoroutine = StartCoroutine(KilledCoroutine());
     }
 
-    public Vector3 ReturnEyes()
+    public bool currentEye()
     {
-        return new Vector3(_leftEye, _middleEye, _rightEye);
+        if (mCurrentEye == 1)
+        {
+            return _leftEye;
+        }
+        else if (mCurrentEye == 2)
+        {
+            return _middleEye;
+        }
+        else
+        {
+            return _rightEye;
+        }
+    }
+
+    public bool popEye()
+    {
+        if (mCurrentEye == 1)
+        {
+            // Pop first eye
+        }
+        else if (mCurrentEye == 2)
+        {
+            // Pop second eye
+        }
+        else if (mCurrentEye == 3)
+        {
+            // Pop last eye.
+
+            return true;
+        }
+
+        mCurrentEye += 1;
+
+        return false;
     }
 
     public bool ReturnRightStick()
