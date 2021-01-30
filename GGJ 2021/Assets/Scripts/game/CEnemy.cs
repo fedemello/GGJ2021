@@ -63,8 +63,8 @@ public class CEnemy : MonoBehaviour, ITriggered
             SetState(_STATE_ON);
         }
 
-        Debug.Log(_state);
-        Debug.Log(_triggersPassed);
+        //Debug.Log(_state);
+        //Debug.Log(_triggersPassed);
 
         if (_state == _STATE_ON)
         {

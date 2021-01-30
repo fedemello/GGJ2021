@@ -235,11 +235,11 @@ public class CSingingStage : CStateBase
         //Vector3 pos1 = Camera.main.ScreenToWorldPoint(new Vector2(x, mTopLine));
         //Vector3 pos2 = Camera.main.ScreenToWorldPoint(new Vector2(x, mBotLine));
 
-        mLineOne = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
-        mLineTwo = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
+        //mLineOne = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
+        //mLineTwo = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
 
-        mLineOne.transform.localPosition = new Vector2(0, mBotLine - Camera.main.pixelHeight * 0.5f);
-        mLineTwo.transform.localPosition = new Vector2(0,  mTopLine - Camera.main.pixelHeight * 0.5f);
+        //mLineOne.transform.localPosition = new Vector2(0, mBotLine - Camera.main.pixelHeight * 0.5f);
+        //mLineTwo.transform.localPosition = new Vector2(0,  mTopLine - Camera.main.pixelHeight * 0.5f);
 
 
         //mLineTwo = Instantiate(_linePrefab, );
