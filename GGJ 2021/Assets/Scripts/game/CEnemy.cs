@@ -12,6 +12,10 @@ public class CEnemy : MonoBehaviour, ITriggered
     private int _pace = 0; // de momento null
     public int _line;
 
+    private int _leftEye = Random.Range(0,2);
+    private int _middleEye = Random.Range(0,2);
+    private int _rightEye = Random.Range(0,2);
+
     public int _triggersPassed = 0;
 
     public bool canBePressed;
@@ -72,6 +76,11 @@ public class CEnemy : MonoBehaviour, ITriggered
     public void Killed()
     {
         _activeCoroutine = StartCoroutine(KilledCoroutine());
+    }
+
+    public Vector3 ReturnEyes()
+    {
+        return new Vector3(_leftEye, _middleEye, _rightEye);
     }
 
     private IEnumerator DestroyBySelfCoroutine()
