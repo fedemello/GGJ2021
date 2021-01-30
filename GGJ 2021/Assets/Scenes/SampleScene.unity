@@ -6968,8 +6968,8 @@ MonoBehaviour:
   _playerOneDeselect: {fileID: 0}
   _playerTwoDeselect: {fileID: 0}
   _mouseMinDistance: 30
-  _distanceFromCenterToMouseBoundaries: 0.35
-  _linePrefab: {fileID: 2577839857188421241, guid: 26ecb65e9b5ccad4db81d7e0fd28221f, type: 3}
+  _distanceFromCenterToMouseBoundaries: 0.167
+  _linePrefab: {fileID: 8561030600004865903, guid: 30e22b6bf3f83334ca34b1f68f3274ad, type: 3}
   _canvas: {fileID: 878619629}
 --- !u!4 &1210337400
 Transform:

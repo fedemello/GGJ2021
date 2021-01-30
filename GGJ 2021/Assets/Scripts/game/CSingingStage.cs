@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CSingingStage : CStateBase
 {
@@ -14,6 +15,11 @@ public class CSingingStage : CStateBase
     public const int DEVICE_KEYBOARD = 1;
     public const int DEVICE_JOYSTICK = 2;
 
+    // Voice pitches
+    public const int PITCH_LOW = 0;
+    public const int PITCH_MID = 1;
+    public const int PITCH_HIGH = 2;
+
     // Current highlighted device.
     private int mCurrentDevice = DEVICE_MOUSE;
 
@@ -25,10 +31,13 @@ public class CSingingStage : CStateBase
     private float mTopLine;
     private float mBotLine;
 
+
+    private int mCurrentPitch = PITCH_MID;
+
     public GameObject _linePrefab;
 
-    private GameObject mLineOne;
-    private GameObject mLineTwo;
+    private Image mLineOne;
+    private Image mLineTwo;
 
 
     // Drums.
@@ -89,7 +98,18 @@ public class CSingingStage : CStateBase
 
     public void checkControllerInput()
     {
-        // MOUSE
+        // Mouse
+        mouseLogic();
+
+        // Keyboard
+        keyboardLogic();
+
+        // Joystick
+        joystickLogic();
+    }
+
+    private void mouseLogic()
+    {
         // Get the current mouse position.
         mCurrentMousePos = Input.mousePosition.y;
 
@@ -99,8 +119,30 @@ public class CSingingStage : CStateBase
             updateHighlight(DEVICE_MOUSE);
         }
 
-        //Debug.Log("last pos: " + mLastMousePos + " currentPos: " + mCurrentMousePos);
+        if (mCurrentMousePos >= mTopLine && mCurrentPitch != PITCH_HIGH)
+        {
+            mCurrentPitch = PITCH_HIGH;
 
+            Debug.Log("high now!");
+        }
+        else if (mCurrentMousePos < mTopLine && mCurrentMousePos >= mBotLine && mCurrentPitch != PITCH_MID)
+        {
+            mCurrentPitch = PITCH_MID;
+
+            Debug.Log("mid now!");
+
+        }
+        else if (mCurrentMousePos < mBotLine && mCurrentPitch != PITCH_LOW)
+        {
+            mCurrentPitch = PITCH_LOW;
+
+            Debug.Log("low now!");
+
+        }
+    }
+
+    private void keyboardLogic()
+    {
         if (Input.GetKeyDown(KeyCode.N))
         {
             //Left button
@@ -119,10 +161,10 @@ public class CSingingStage : CStateBase
         {
             // Pause?
         }
+    }
 
-
-
-        // Joystick
+    private void joystickLogic()
+    {
         if (mPlayerOne != null)
         {
             // Get current analog direction. Do stuff.
@@ -142,36 +184,10 @@ public class CSingingStage : CStateBase
             //{
             //    mPlayerOne.Vibrate(0, 5);
             //}
-            //else if (Input.GetKeyDown(KeyCode.Q))
-            //{
-            //    mPlayerOne.Vibrate(5, 0);
-            //}
-            //else if (Input.GetKeyDown(KeyCode.W))
-            //{
-            //    mPlayerOne.Vibrate(5, 0);
-            //}
             //else if (Input.GetKeyDown(KeyCode.D))
             //{
             //    mPlayerOne.StopVibration();
             //}
-        }
-    }
-
-    private void checkKeyboardInput()
-    {
-        // Keyboard (avoid mouse input)
-        if (!Input.GetKey(KeyCode.Mouse0)
-              && !Input.GetKey(KeyCode.Mouse1)
-              && !Input.GetKey(KeyCode.Mouse2)
-              && !Input.GetKey(KeyCode.Mouse3)
-              && !Input.GetKey(KeyCode.Mouse4)
-              && !Input.GetKey(KeyCode.Mouse5)
-              && !Input.GetKey(KeyCode.Mouse6))
-        {
-            if (Input.anyKeyDown)
-            {
-                updateHighlight(DEVICE_KEYBOARD);
-            }
         }
     }
 
@@ -199,18 +215,22 @@ public class CSingingStage : CStateBase
 
     public void createLines()
     {
-        float x = Camera.main.pixelWidth / 2.0f;
+        float dist = Camera.main.pixelHeight * _distanceFromCenterToMouseBoundaries;
 
-        float middle = Camera.main.pixelHeight / 2.0f;
-        float dist = middle * (_distanceFromCenterToMouseBoundaries / 2.0f);
+        Debug.Log("dist: " + dist);
 
-        Debug.Log("pixelMiddle: " + middle + " dist: " + dist);
+        mBotLine = Camera.main.pixelHeight * 0.5f - dist;
+        mTopLine = Camera.main.pixelHeight * 0.5f + dist;
 
-        mTopLine = middle - dist;
-        mBotLine = middle + dist;
+        //Vector3 pos1 = Camera.main.ScreenToWorldPoint(new Vector2(x, mTopLine));
+        //Vector3 pos2 = Camera.main.ScreenToWorldPoint(new Vector2(x, mBotLine));
 
-        mLineOne = Instantiate(_linePrefab, new Vector2(x, mTopLine), Quaternion.identity);
-        mLineTwo = Instantiate(_linePrefab, new Vector2(x, mBotLine), Quaternion.identity);
+        mLineOne = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
+        mLineTwo = Instantiate(_linePrefab, _canvas.transform).GetComponent<Image>();
+
+        mLineOne.transform.localPosition = new Vector2(0, mBotLine - Camera.main.pixelHeight * 0.5f);
+        mLineTwo.transform.localPosition = new Vector2(0,  mTopLine - Camera.main.pixelHeight * 0.5f);
+
 
         //mLineTwo = Instantiate(_linePrefab, );
     }
