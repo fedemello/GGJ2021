@@ -7,7 +7,9 @@ public class CEnemyScroller : MonoBehaviour
 
     public float beatTempo;
 
-    public bool hasStarted;
+    public bool hasStarted = true;
+
+    public float _spawnTimer;
 
     public Transform _spawn1;
     public Transform _spawn2;
@@ -15,15 +17,15 @@ public class CEnemyScroller : MonoBehaviour
 
     private Vector3 _offset = new Vector3(0, 4, 0);
 
+    private Coroutine _activeCoroutine;
+
 
     // Start is called before the first frame update
     void Start()
     {
         beatTempo = beatTempo / 60f;
 
-        this.SpawnEnemy(_spawn1.position + _offset);
-        this.SpawnEnemy(_spawn2.position + _offset);
-        this.SpawnEnemy(_spawn3.position + _offset);
+        _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
     // Update is called once per frame
@@ -42,6 +44,33 @@ public class CEnemyScroller : MonoBehaviour
         }
     }
 
+    private IEnumerator SpawnCoroutine()
+    {
+        while (true)
+        {
+            int ran = Random.Range(1, 4);
+
+            if (ran == 1)
+            {
+                SpawnEnemy(_spawn1.position + _offset);
+            }
+
+            else if (ran == 2)
+            {
+                SpawnEnemy(_spawn2.position + _offset);
+            }
+
+            else if (ran == 3)
+            {
+                SpawnEnemy(_spawn3.position+ _offset );
+            }
+
+            yield return new WaitForSeconds(_spawnTimer);
+        }
+
+        yield return null;
+    }
+
 
     public void SpawnEnemy(Vector3 pos)
     {
@@ -50,6 +79,5 @@ public class CEnemyScroller : MonoBehaviour
         enemy.transform.parent = this.transform;
 
         CEnemyManager.Inst.addEnemy(enemy.GetComponent<CEnemy>());
-
     }
 }
