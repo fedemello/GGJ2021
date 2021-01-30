@@ -8,13 +8,14 @@ public class CEnemy : MonoBehaviour, ITriggered
     private static int _STATE_ON = 1;
 
 
-    public int _pitch;
-    private int _pace = 0; // de momento null
     public int _line;
-
+    public int _pitch;
     private int _leftEye = Random.Range(0,2);
     private int _middleEye = Random.Range(0,2);
     private int _rightEye = Random.Range(0,2);
+    private bool _rightStick = false;
+
+    private int _pace = 0; // de momento null
 
     public int _triggersPassed = 0;
 
@@ -25,6 +26,20 @@ public class CEnemy : MonoBehaviour, ITriggered
     public int _state;
 
     private Coroutine _activeCoroutine;
+    
+    private void Awake() 
+    {
+        float right = Random.value;
+
+        if (right > 0.5f)
+        {
+            _rightStick = true;
+        }
+        else
+        {
+            _rightStick = false;
+        }
+    }
     
     private void Start() 
     {
@@ -81,6 +96,11 @@ public class CEnemy : MonoBehaviour, ITriggered
     public Vector3 ReturnEyes()
     {
         return new Vector3(_leftEye, _middleEye, _rightEye);
+    }
+
+    public bool ReturnRightStick()
+    {
+        return _rightStick;
     }
 
     private IEnumerator DestroyBySelfCoroutine()
