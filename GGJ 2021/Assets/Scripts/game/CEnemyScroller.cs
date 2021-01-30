@@ -13,7 +13,7 @@ public class CEnemyScroller : MonoBehaviour
     public Transform _spawn2;
     public Transform _spawn3;
 
-    private Vector3 _offset;
+    private Vector3 _offset = new Vector3(0, 4, 0);
 
 
     // Start is called before the first frame update
@@ -21,9 +21,9 @@ public class CEnemyScroller : MonoBehaviour
     {
         beatTempo = beatTempo / 60f;
 
-        this.SpawnEnemy(_spawn1.position);
-        this.SpawnEnemy(_spawn2.position);
-        this.SpawnEnemy(_spawn3.position);
+        this.SpawnEnemy(_spawn1.position + _offset);
+        this.SpawnEnemy(_spawn2.position + _offset);
+        this.SpawnEnemy(_spawn3.position + _offset);
     }
 
     // Update is called once per frame
@@ -40,8 +40,6 @@ public class CEnemyScroller : MonoBehaviour
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
-
-
     }
 
 

@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24554e4aa29e8b408e2739a29392d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textScore: {fileID: 0}
+  _textScore: {fileID: 1166231991}
   _basicPoints: 50
   _comboPoints: 10
   _currentCombo: 0
@@ -6584,8 +6584,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.8
-  m_fontSizeBase: 59.8
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10936,7 +10936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b88e7e9d69a7c14480aabac41417af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatTempo: 160
+  beatTempo: 1600
   hasStarted: 0
   _spawn1: {fileID: 1730162920}
   _spawn2: {fileID: 1651197126}

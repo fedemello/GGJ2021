@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CScoreManager : MonoBehaviour
 {
-    public Text _textScore;
+    public TextMeshProUGUI _textScore;
 
     public int _basicPoints;
     public int _comboPoints;
