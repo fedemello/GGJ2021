@@ -37,16 +37,21 @@ public class CEnemyManager : MonoBehaviour
     public void addEnemy(CEnemy newEnemy)
     {
         _enemies.Add(newEnemy);
+
+        if (_firstEnemy == null)
+        {
+            _firstEnemy = newEnemy;
+        }
     }
 
     private void Update() 
     {
-        if (_firstEnemy == null)
-            UpdateFirstEnemy();
+        //if (_firstEnemy == null)
+        //    UpdateFirstEnemy();
     }
 
     private void UpdateFirstEnemy()
-    {   
+    {
         for (int i = 0; i < _enemies.Count; i ++)
         {
             if (_firstEnemy == null)
@@ -61,11 +66,20 @@ public class CEnemyManager : MonoBehaviour
                 }
             }
         }
+
+        Debug.Log("updating first enemy: " + _firstEnemy);
     }
 
     public void ImOut(CEnemy it)
     {
         _enemies.Remove(it);
+
+        if (it == _firstEnemy)
+        {
+            _firstEnemy = null;
+
+            UpdateFirstEnemy();
+        }
     }
 
     public CEnemy FirstEnemy()
