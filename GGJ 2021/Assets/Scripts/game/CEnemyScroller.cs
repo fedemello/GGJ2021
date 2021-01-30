@@ -43,6 +43,7 @@ public class CEnemyScroller : MonoBehaviour
         }
         else
         {
+            // Este movimiento se aplica a todos los enemigos simultaneamente
             transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
 
@@ -52,9 +53,23 @@ public class CEnemyScroller : MonoBehaviour
 
     public void SpawnEnemy(Vector3 pos)
     {
+        // Spawnea a un enemigo en la ubicacíon pasasda por paramentro
+        // Y se agrega al manager de enemigos
 
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
+        if(pos.y == alturaFila1)
+        {
+            enemy.GetComponent<CEnemy>().line = 1;
+        }
+        else if (pos.y == alturaFila2)
+        {
+            enemy.GetComponent<CEnemy>().line = 2;
+        }
+        else if (pos.y == alturaFila3)
+        {
+            enemy.GetComponent<CEnemy>().line = 3;
+        }
 
         CEnemyManager.Inst.addEnemy(enemy.GetComponent<CEnemy>());
 
