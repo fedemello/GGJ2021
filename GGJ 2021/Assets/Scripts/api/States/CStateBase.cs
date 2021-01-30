@@ -12,6 +12,7 @@ public class CStateBase : MonoBehaviour
 
     protected float mTimeState = 0;
 
+    [HideInInspector]
     public CGrid mGrid;
 
     private bool mMenuEnabled = true;
@@ -22,8 +23,11 @@ public class CStateBase : MonoBehaviour
     private InputDevice mPlayerOne;
     private InputDevice mPlayerTwo;
 
+    [HideInInspector]
     public float STICK_OFFSET = 0.70f;
+    [HideInInspector]
     public float TICK_DELAY = 0.3f;
+    [HideInInspector]
     public float BACK_STICK_OFFSET = 0.25f;
 
     private float mPlayerOneDelay = 0;
@@ -44,20 +48,35 @@ public class CStateBase : MonoBehaviour
 
     // Public variables to set at each menu.
     public AudioClip _musica;
+
+    [HideInInspector]
     public bool _loopMusic = true;
 
+    [HideInInspector]
     public GameObject _selectorPrefab1;
+
+    [HideInInspector]
     public GameObject _selectorPrefab2;
 
+    [HideInInspector]
     public SpriteRenderer _background;
 
+    [HideInInspector]
     public AudioClip _playerOneMove;
+
+    [HideInInspector]
     public AudioClip _playerTwoMove;
 
+    [HideInInspector]
     public AudioClip _playerOneSelect;
+
+    [HideInInspector]
     public AudioClip _playerTwoSelect;
 
+    [HideInInspector]
     public AudioClip _playerOneDeselect;
+
+    [HideInInspector]
     public AudioClip _playerTwoDeselect;
 
 
