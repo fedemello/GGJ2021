@@ -10,9 +10,9 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public int _line;
     public int _pitch;
-    private int _leftEye = Random.Range(0,2);
-    private int _middleEye = Random.Range(0,2);
-    private int _rightEye = Random.Range(0,2);
+    private int _leftEye;
+    private int _middleEye;
+    private int _rightEye;
     private bool _rightStick = false;
 
     private int _pace = 0; // de momento null
@@ -29,6 +29,10 @@ public class CEnemy : MonoBehaviour, ITriggered
     
     private void Awake() 
     {
+        _leftEye = Random.Range(0,2);
+        _middleEye = Random.Range(0,2);
+        _rightEye = Random.Range(0,2);
+
         float right = Random.value;
 
         if (right > 0.5f)
@@ -55,8 +59,8 @@ public class CEnemy : MonoBehaviour, ITriggered
             SetState(_STATE_ON);
         }
 
-        //Debug.Log(_state);
-        //Debug.Log(_triggersPassed);
+        Debug.Log(_state);
+        Debug.Log(_triggersPassed);
 
         if (_state == _STATE_ON)
         {
@@ -90,8 +94,6 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public void Killed()
     {
-        Debug.Log("i'm killed!");
-
         _activeCoroutine = StartCoroutine(KilledCoroutine());
     }
 
@@ -106,9 +108,9 @@ public class CEnemy : MonoBehaviour, ITriggered
     }
 
     private IEnumerator DestroyBySelfCoroutine()
-    { 
-        CEnemyManager.Inst.ImOut(this);
+    {
         Destroy(this.gameObject);
+        CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.BrokeCombo();
 
         //Do something bad
@@ -118,10 +120,8 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator KilledCoroutine()
     {
-        Debug.Log("dying!");
-
-        CEnemyManager.Inst.ImOut(this);
         Destroy(this.gameObject);
+        CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.AddToScore();
 
         //Do something
