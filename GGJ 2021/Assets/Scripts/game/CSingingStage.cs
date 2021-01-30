@@ -39,6 +39,9 @@ public class CSingingStage : CStateBase
     private Image mLineOne;
     private Image mLineTwo;
 
+    private CProcessInput _inputProcessing;
+
+
 
     // Drums.
     private bool mPressedLeftDrum = true;
@@ -52,6 +55,8 @@ public class CSingingStage : CStateBase
     public override void init()
     {
         base.init();
+
+        _inputProcessing = new CProcessInput();
 
         createLines();
 
@@ -138,6 +143,11 @@ public class CSingingStage : CStateBase
 
             Debug.Log("low now!");
 
+        }
+
+        if (mCurrentDevice == DEVICE_MOUSE)
+        {
+            _inputProcessing.processInput(mCurrentDevice, mCurrentPitch);
         }
     }
 

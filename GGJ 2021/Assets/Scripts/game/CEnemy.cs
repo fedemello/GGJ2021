@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CEnemy : MonoBehaviour, ITriggered
 {
-    private static int _STATE_OFF = 0;
-    private static int _STATE_ON = 1;
+    public static int _STATE_OFF = 0;
+    public static int _STATE_ON = 1;
 
 
     public int _pitch;
@@ -36,8 +36,8 @@ public class CEnemy : MonoBehaviour, ITriggered
             SetState(_STATE_ON);
         }
 
-        Debug.Log(_state);
-        Debug.Log(_triggersPassed);
+        //Debug.Log(_state);
+        //Debug.Log(_triggersPassed);
 
         if (_state == _STATE_ON)
         {
@@ -71,13 +71,15 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public void Killed()
     {
+        Debug.Log("i'm killed!");
+
         _activeCoroutine = StartCoroutine(KilledCoroutine());
     }
 
     private IEnumerator DestroyBySelfCoroutine()
-    {
-        Destroy(this.gameObject);
+    { 
         CEnemyManager.Inst.ImOut(this);
+        Destroy(this.gameObject);
         CScoreManager.Inst.BrokeCombo();
 
         //Do something bad
@@ -87,8 +89,10 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator KilledCoroutine()
     {
-        Destroy(this.gameObject);
+        Debug.Log("dying!");
+
         CEnemyManager.Inst.ImOut(this);
+        Destroy(this.gameObject);
         CScoreManager.Inst.AddToScore();
 
         //Do something
