@@ -69,6 +69,7 @@ public class CEnemy : MonoBehaviour, ITriggered
     private IEnumerator DestroyBySelfCoroutine()
     {
         Destroy(this.gameObject);
+        CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.BrokeCombo();
 
         //Do something bad

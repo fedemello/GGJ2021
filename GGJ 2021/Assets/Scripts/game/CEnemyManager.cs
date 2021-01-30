@@ -20,7 +20,7 @@ public class CEnemyManager : MonoBehaviour
     public GameObject _enemyAsset;
     private List<CEnemy> _enemies = new List<CEnemy>();
 
-    private CEnemy _firstEnemy;
+    public CEnemy _firstEnemy;
 
     private void Awake()
     {
@@ -61,5 +61,15 @@ public class CEnemyManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ImOut(CEnemy it)
+    {
+        _enemies.Remove(it);
+    }
+
+    public CEnemy FirstEnemy()
+    {
+        return _firstEnemy;
     }
 }

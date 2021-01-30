@@ -71,8 +71,7 @@ public class CEnemyScroller : MonoBehaviour
 
         yield return null;
     }
-
-
+    
     public void SpawnEnemy(Vector3 pos, int line)
     {
         // Spawnea a un enemigo en la ubicacíon pasasda por paramentro
