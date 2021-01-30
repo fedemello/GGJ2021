@@ -53,17 +53,17 @@ public class CEnemyScroller : MonoBehaviour
 
             if (ran == 1)
             {
-                SpawnEnemy(_spawn1.position + _offset);
+                SpawnEnemy(_spawn1.position + _offset, 1);
             }
 
             else if (ran == 2)
             {
-                SpawnEnemy(_spawn2.position + _offset);
+                SpawnEnemy(_spawn2.position + _offset, 2);
             }
 
             else if (ran == 3)
             {
-                SpawnEnemy(_spawn3.position+ _offset );
+                SpawnEnemy(_spawn3.position+ _offset, 3);
             }
 
             yield return new WaitForSeconds(_spawnTimer);
@@ -73,25 +73,16 @@ public class CEnemyScroller : MonoBehaviour
     }
 
 
-    public void SpawnEnemy(Vector3 pos)
+    public void SpawnEnemy(Vector3 pos, int line)
     {
         // Spawnea a un enemigo en la ubicacíon pasasda por paramentro
         // Y se agrega al manager de enemigos
 
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
-        if(pos.y == alturaFila1)
-        {
-            enemy.GetComponent<CEnemy>().line = 1;
-        }
-        else if (pos.y == alturaFila2)
-        {
-            enemy.GetComponent<CEnemy>().line = 2;
-        }
-        else if (pos.y == alturaFila3)
-        {
-            enemy.GetComponent<CEnemy>().line = 3;
-        }
+        
+        enemy.GetComponent<CEnemy>().line = line;
+        
 
         CEnemyManager.Inst.addEnemy(enemy.GetComponent<CEnemy>());
     }
