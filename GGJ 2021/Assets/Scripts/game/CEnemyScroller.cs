@@ -71,17 +71,21 @@ public class CEnemyScroller : MonoBehaviour
 
         yield return null;
     }
-    
+
     public void SpawnEnemy(Vector3 pos, int line)
     {
         // Spawnea a un enemigo en la ubicacíon pasasda por paramentro
         // Y se agrega al manager de enemigos
 
+        int pitch = Random.Range(0, 3);
+
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
         
-        enemy.GetComponent<CEnemy>().line = line;
-        
+        CEnemy enemyccc = enemy.GetComponent<CEnemy>();        
+
+        enemyccc._line = line;
+        enemyccc._pitch = pitch;
 
         CEnemyManager.Inst.addEnemy(enemy.GetComponent<CEnemy>());
     }

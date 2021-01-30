@@ -7,9 +7,12 @@ public class CEnemy : MonoBehaviour, ITriggered
     private static int _STATE_OFF = 0;
     private static int _STATE_ON = 1;
 
-    public int _triggersPassed = 0;
 
-    public int line;
+    public int _pitch;
+    private int _pace = 0; // de momento null
+    public int _line;
+
+    public int _triggersPassed = 0;
 
     public bool canBePressed;
 
