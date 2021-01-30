@@ -22,7 +22,7 @@ public class CAudioManager : MonoBehaviour
 
     private CAudioSource _music;
 
-    private List<CAudioSource> _sfxs;
+    private List<CAudioSource> _sfxs = new List<CAudioSource>();
     //private List<string> _sfxKeys;
     //private CAudioSource _sfx;
 
@@ -38,8 +38,6 @@ public class CAudioManager : MonoBehaviour
         }
 
         _inst = this;
-
-        _sfxs = new List<CAudioSource>();
         //_sfxKeys = new List<string>();
 
         //Setup music.
