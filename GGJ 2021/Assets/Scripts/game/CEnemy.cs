@@ -69,6 +69,11 @@ public class CEnemy : MonoBehaviour, ITriggered
         _state = aState;
     }
 
+    public void Killed()
+    {
+        _activeCoroutine = StartCoroutine(KilledCoroutine());
+    }
+
     private IEnumerator DestroyBySelfCoroutine()
     {
         Destroy(this.gameObject);
@@ -76,6 +81,17 @@ public class CEnemy : MonoBehaviour, ITriggered
         CScoreManager.Inst.BrokeCombo();
 
         //Do something bad
+
+        yield return null;
+    }
+
+    private IEnumerator KilledCoroutine()
+    {
+        Destroy(this.gameObject);
+        CEnemyManager.Inst.ImOut(this);
+        CScoreManager.Inst.AddToScore();
+
+        //Do something
 
         yield return null;
     }
