@@ -20,8 +20,8 @@ public class CStateBase : MonoBehaviour
     protected bool mPlayerOneEnabled = true;
     protected bool mPlayerTwoEnabled = true;
 
-    private InputDevice mPlayerOne;
-    private InputDevice mPlayerTwo;
+    protected InputDevice mPlayerOne;
+    protected InputDevice mPlayerTwo;
 
     [HideInInspector]
     public float STICK_OFFSET = 0.70f;

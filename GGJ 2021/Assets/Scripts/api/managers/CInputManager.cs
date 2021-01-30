@@ -36,7 +36,7 @@ public class CInputManager : MonoBehaviour
 
         _inst = this;
 
-        Debug.Log("creating new input manager");
+        //Debug.Log("creating new input manager");
 
         getDevices();
 

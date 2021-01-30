@@ -190,13 +190,13 @@ public class CLevelManager : MonoBehaviour
         if (mPlayerOne == null || !mPlayerOne.IsAttached)
         {
             mPlayerOne = CInputManager.Inst.getPlayerControl();
-            Debug.Log("updating player one controller: " + (mPlayerOne != null).ToString());
+            //Debug.Log("updating player one controller: " + (mPlayerOne != null).ToString());
         }
 
         if (mPlayerTwo == null || !mPlayerTwo.IsAttached)
         {
             mPlayerTwo = CInputManager.Inst.getPlayerControl(false);
-            Debug.Log("updating player two controller: " + (mPlayerTwo != null).ToString());
+            //Debug.Log("updating player two controller: " + (mPlayerTwo != null).ToString());
 
         }
     }
