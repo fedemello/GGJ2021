@@ -6,6 +6,7 @@ GGJ\ 2021/[Bb]uilds/
 GGJ\ 2021/[Ll]ogs/
 GGJ\ 2021/.vsconfig
 
+
 # Never ignore Asset meta data
 !GGJ\ 2021/[Aa]ssets/**/*.meta
 
@@ -54,6 +55,8 @@ builds/
 
 # Crashlytics generated file
 GGJ\ 2021/crashlytics-build.properties
+
+GGJ\ 2021/Packages/packages-lock.json
 
 GGJ\ 2021/Packages/manifest.json
 GGJ\ 2021/ProjectSettings/ProjectVersion.txt

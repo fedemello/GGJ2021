@@ -29,11 +29,16 @@ public class CSingingStage : CStateBase
 
     private GameObject mLineOne;
     private GameObject mLineTwo;
-    
+
+
+    // Drums.
+    private bool mPressedLeftDrum = true;
 
     // Last mouse position in the Y axis.
     private float mCurrentMousePos = 0;
     private float mLastMousePos = 0;
+
+    public Canvas _canvas;
 
     public override void init()
     {
@@ -94,19 +99,21 @@ public class CSingingStage : CStateBase
             updateHighlight(DEVICE_MOUSE);
         }
 
-
-
         //Debug.Log("last pos: " + mLastMousePos + " currentPos: " + mCurrentMousePos);
 
         if (Input.GetKeyDown(KeyCode.N))
         {
             //Left button
             updateHighlight(DEVICE_KEYBOARD);
+
+            mPressedLeftDrum = true;
         }
         else if (Input.GetKeyDown(KeyCode.M))
         {
             //Right button
             updateHighlight(DEVICE_KEYBOARD);
+
+            mPressedLeftDrum = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
