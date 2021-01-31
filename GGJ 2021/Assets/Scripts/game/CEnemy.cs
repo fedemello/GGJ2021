@@ -44,7 +44,14 @@ public class CEnemy : MonoBehaviour, ITriggered
     private Coroutine _activeCoroutine;
 
     private List<int> _triggersActivated = new List<int>();
-    
+
+    public SpriteRenderer _leftEyeSpr;
+    public SpriteRenderer _middleEyeSpr;
+    public SpriteRenderer _rightEyeSpr;
+
+    public Color _leftCol;
+    public Color _rightCol;
+
     private void Awake() 
     {
         _leftEye = (Random.value > 0.5f);
@@ -131,6 +138,19 @@ public class CEnemy : MonoBehaviour, ITriggered
         if (_state == _STATE_ON)
         {
             this.transform.GetComponent<SpriteRenderer>().sprite = _secondPhaseSprite;
+
+            _leftEyeSpr.gameObject.SetActive(true);
+            _middleEyeSpr.gameObject.SetActive(true);
+            _rightEyeSpr.gameObject.SetActive(true);
+
+            if (_line == 1)
+            {
+                _leftEyeSpr.color = _leftEye ? _leftCol : _rightCol;
+                _middleEyeSpr.color = _middleEye ? _leftCol : _rightCol;
+                _rightEyeSpr.color = _rightEye ? _leftCol : _rightCol;
+
+            }
+
         }
     }
 
