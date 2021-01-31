@@ -88,6 +88,11 @@ public class CSingingStage : CStateBase
     public float _standardVolume = 0.2f;
     public float _highlightedVolume = 0.8f;
 
+    public List<AudioClip> _drumSfx = new List<AudioClip>();
+    public AudioClip _guitarIntro;
+
+    private int mCurrentDrumSfx = 0;
+
     public override void init()
     {
         base.init();
@@ -228,6 +233,15 @@ public class CSingingStage : CStateBase
         if (pressed && mCurrentDevice == DEVICE_KEYBOARD)
         {
             _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
+
+            CAudioManager.Inst.playSfx("drum_" + mCurrentDrumSfx, _drumSfx[mCurrentDevice]);
+
+            mCurrentDrumSfx += 1;
+
+            if (mCurrentDrumSfx >= _drumSfx.Count)
+            {
+                mCurrentDrumSfx = 0;
+            }
         }
     }
 
@@ -420,6 +434,10 @@ public class CSingingStage : CStateBase
 
                 CAudioManager.Inst.setSfxVolume("guitar", _highlightedVolume);
 
+                if (!CAudioManager.Inst.isSfxPlaying("guitar_solo"))
+                {
+                    CAudioManager.Inst.playSfx("guitar_solo", _guitarIntro);
+                }
             }
 
             //Highlight new device.

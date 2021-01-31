@@ -1660,6 +1660,11 @@ MonoBehaviour:
   _guitar: {fileID: 8300000, guid: 104fcf9137fc9a4478594aac236d5035, type: 3}
   _standardVolume: 0.4
   _highlightedVolume: 0.6
+  _drumSfx:
+  - {fileID: 8300000, guid: 013728395e9c8fb4fa7ca3a82a0a33c1, type: 3}
+  - {fileID: 8300000, guid: 176965012d9b23348a8c8d74a84cad4b, type: 3}
+  - {fileID: 8300000, guid: 73bdb0f33b798894493c20545a41743f, type: 3}
+  _guitarIntro: {fileID: 8300000, guid: b1e23ec840fd5064095533daecc53e67, type: 3}
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0
@@ -1705,6 +1710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAsset: {fileID: 5667388473058228991, guid: 309eaa8d8c07b1e439c7c806100f4b17, type: 3}
   _firstEnemy: {fileID: 0}
+  _enemyAudio: {fileID: 8300000, guid: e816ef1de48e770459013ab512d26faf, type: 3}
+  _enemyVolume: 1
 --- !u!4 &1302783813
 Transform:
   m_ObjectHideFlags: 0

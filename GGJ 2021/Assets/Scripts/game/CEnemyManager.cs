@@ -22,6 +22,10 @@ public class CEnemyManager : MonoBehaviour
 
     public CEnemy _firstEnemy;
 
+    public AudioClip _enemyAudio;
+
+    public float _enemyVolume;
+
     private void Awake()
     {
         if (_inst != null && _inst != this)
@@ -41,10 +45,15 @@ public class CEnemyManager : MonoBehaviour
         if (_firstEnemy == null)
         {
             _firstEnemy = newEnemy;
+
+            if (_firstEnemy._line == 2 && _firstEnemy._state == CEnemy._STATE_ON)
+            {
+                playEnemySfx();
+            }
         }
     }
 
-    private void Update() 
+    private void Update()
     {
         //if (_firstEnemy == null)
         //    UpdateFirstEnemy();
@@ -52,7 +61,7 @@ public class CEnemyManager : MonoBehaviour
 
     private void UpdateFirstEnemy()
     {
-        for (int i = 0; i < _enemies.Count; i ++)
+        for (int i = 0; i < _enemies.Count; i++)
         {
             if (_firstEnemy == null)
             {
@@ -68,6 +77,11 @@ public class CEnemyManager : MonoBehaviour
         }
 
         Debug.Log("updating first enemy: " + _firstEnemy);
+
+        if (_firstEnemy._line == 2 && _firstEnemy._state == CEnemy._STATE_ON)
+        {
+            playEnemySfx();
+        }
     }
 
     public void ImOut(CEnemy it)
@@ -85,6 +99,21 @@ public class CEnemyManager : MonoBehaviour
     public CEnemy FirstEnemy()
     {
         return _firstEnemy;
+    }
+    public void playEnemySfx()
+    {
+        if (!CAudioManager.Inst.isSfxPlaying("enemy_audio"))
+        {
+            CAudioManager.Inst.playSfx("enemy_audio", _enemyAudio, _enemyVolume);
+        }
+    }
+
+    public void stopEnemySfx()
+    {
+        if (CAudioManager.Inst.isSfxPlaying("enemy_audio"))
+        {
+            CAudioManager.Inst.stopSfx("enemy_audio");
+        }
     }
 
     public int cantEnemies()
