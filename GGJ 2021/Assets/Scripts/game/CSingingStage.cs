@@ -119,13 +119,15 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_PLAYING)
         {
-
         }
         else if (aState == STATE_ENDING)
         {
             Debug.Log("END!");
 
-            mPlayerOne.StopVibration();
+            if (mPlayerOne != null)
+            {
+                mPlayerOne.StopVibration();
+            }
         }
     }
 
@@ -411,7 +413,10 @@ public class CSingingStage : CStateBase
 
                 CAudioManager.Inst.setSfxVolume("guitar", _standardVolume);
 
-                mPlayerOne.StopVibration();
+                if (mPlayerOne != null)
+                {
+                    mPlayerOne.StopVibration();
+                }
             }
 
             // Save new device.

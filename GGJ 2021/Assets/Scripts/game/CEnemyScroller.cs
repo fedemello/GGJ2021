@@ -32,6 +32,8 @@ public class CEnemyScroller : MonoBehaviour
 
     private Coroutine _activeCoroutine;
 
+    public CPlayerLifebar _playerScore;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class CEnemyScroller : MonoBehaviour
 
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
 
-
+        _playerScore.setCurrentPercent(0.5f);
     }
 
     // Update is called once per frame
@@ -61,7 +63,7 @@ public class CEnemyScroller : MonoBehaviour
             //transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
 
-        float puntaje = (float)CScoreManager.Inst._score / 50;
+        float puntaje = ((float)CScoreManager.Inst._score) / 50;
         float cantEnemigosVivos = (float)CEnemyManager.Inst.cantEnemies();
 
         float pointsRemaining = cantEnemigosVivos + (_cantidadMaxSpawn - _currentCantidadSpawn);
@@ -85,6 +87,10 @@ public class CEnemyScroller : MonoBehaviour
         }
 
         Debug.Log("Barra: " + _valorParaBarra);
+        _playerScore.setCurrentPercent(_valorParaBarra);
+
+
+
 
 
 
