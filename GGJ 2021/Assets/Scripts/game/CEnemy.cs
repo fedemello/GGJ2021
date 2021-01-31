@@ -163,6 +163,13 @@ public class CEnemy : MonoBehaviour, ITriggered
                 _rightEyeSpr.color = _rightEye ? _leftCol : _rightCol;
 
             }
+            else if (_line == 2)
+            {
+                if (CEnemyManager.Inst._firstEnemy == this)
+                {
+                    CEnemyManager.Inst.playEnemySfx();
+                }
+            }
 
         }
     }
@@ -226,6 +233,11 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator DestroyBySelfCoroutine()
     {
+        if (_line == 2)
+        {
+            CEnemyManager.Inst.stopEnemySfx();
+        }
+
         SetMovementState(_STATE_DEATH);
         _anim.SetTrigger("Trigger3");
         CEnemyManager.Inst.ImOut(this);
@@ -243,6 +255,11 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator KilledCoroutine()
     {
+        if (_line == 2)
+        {
+            CEnemyManager.Inst.stopEnemySfx();
+        }
+
         SetMovementState(_STATE_DEATH);
         _anim.SetTrigger("Trigger2");
         CEnemyManager.Inst.ImOut(this);
