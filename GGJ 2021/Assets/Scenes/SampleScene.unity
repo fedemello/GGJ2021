@@ -1722,7 +1722,7 @@ MonoBehaviour:
   STICK_OFFSET: 0.7
   TICK_DELAY: 0.3
   BACK_STICK_OFFSET: 0.25
-  _musica: {fileID: 8300000, guid: 44da3c16e27cee047a74bda511a25252, type: 3}
+  _musica: {fileID: 8300000, guid: 94c256774715b9341a8ae95198b1cb5d, type: 3}
   _loopMusic: 0
   _selectorPrefab1: {fileID: 0}
   _selectorPrefab2: {fileID: 0}
@@ -1749,9 +1749,9 @@ MonoBehaviour:
   _canvas: {fileID: 878619629}
   _joystickMarginValue: 0.2
   _joystickResetMarginValue: 0.07
-  _singing: {fileID: 8300000, guid: 00280bcac6efe05498e80d901fc01e7b, type: 3}
-  _drums: {fileID: 8300000, guid: 65ef0d849fe088f45b3e9ed70bdf7fd5, type: 3}
-  _guitar: {fileID: 8300000, guid: 104fcf9137fc9a4478594aac236d5035, type: 3}
+  _singing: {fileID: 8300000, guid: d83f4b1e9300d7c4bbaa13997de5fc07, type: 3}
+  _drums: {fileID: 8300000, guid: b7a2dda6f84a2b243be718e3af2fcfa6, type: 3}
+  _guitar: {fileID: 8300000, guid: a6eaf2f484448f3439dbfb06b282ef6b, type: 3}
   _standardVolume: 0.4
   _highlightedVolume: 0.6
   _drumSfx:
@@ -1759,6 +1759,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 176965012d9b23348a8c8d74a84cad4b, type: 3}
   - {fileID: 8300000, guid: 73bdb0f33b798894493c20545a41743f, type: 3}
   _guitarIntro: {fileID: 8300000, guid: b1e23ec840fd5064095533daecc53e67, type: 3}
+  _singingMusic: {fileID: 8300000, guid: b19c70d7edbbf6d46948d2075b03da42, type: 3}
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0

@@ -120,18 +120,18 @@ public class CSingingStage : CStateBase
             _camera.position = _cameraInicialPos;
             _intro.Intro();
 
-            CAudioManager.Inst.startMusic(_singingMusic);
-
-            CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
-            CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
-            CAudioManager.Inst.playSfx("guitar", _guitar, _standardVolume);
-
             StartCoroutine(IntroCoroutine());
             
             updateHighlight(DEVICE_MOUSE);
         }
         else if (aState == STATE_PLAYING)
         {
+            CAudioManager.Inst.startMusic(_singingMusic);
+
+            CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
+            CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
+            CAudioManager.Inst.playSfx("guitar", _guitar, _standardVolume);
+
             _enemyScroller.Spawn();
         }
         else if (aState == STATE_ENDING)
