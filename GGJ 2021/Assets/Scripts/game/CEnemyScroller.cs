@@ -28,7 +28,7 @@ public class CEnemyScroller : MonoBehaviour
     public Transform _spawn2;
     public Transform _spawn3;
 
-    private Vector3 _offset = new Vector3(0, 4, 0);
+    private Vector3 _offset = new Vector3(-40, 4, 0);
 
     private Coroutine _activeCoroutine;
 
