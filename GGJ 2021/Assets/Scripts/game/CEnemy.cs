@@ -39,6 +39,8 @@ public class CEnemy : MonoBehaviour, ITriggered
     public int _state;
     private int _movement_state;
 
+    private int currentHealth = 100;
+
     private Coroutine _activeCoroutine;
     
     private void Awake() 
@@ -208,7 +210,18 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     }
 
+    public void getHit(int aDamage)
+    {
+        currentHealth -= aDamage;
 
+        Debug.Log("hit! health: " + currentHealth);
 
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            Killed();
+        }
+    }
 
 }

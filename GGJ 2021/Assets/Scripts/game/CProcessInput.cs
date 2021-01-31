@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class CProcessInput
 {
-    public void processInput(int aType, object aValues)
+    public int GUITAR_DAMAGE = 25;
+    public bool processInput(int aType, object aValues)
     {
+
 
         CEnemy enemy = CEnemyManager.Inst.FirstEnemy();
 
-        if (enemy == null || enemy._state == CEnemy._STATE_OFF)
+        if (enemy == null)
         {
             Debug.Log("enemy is null!");
-            return;
+            return true;
+        }
+
+        if (enemy._state == CEnemy._STATE_OFF)
+        {
+            return true;
         }
 
         switch (aType)
@@ -21,14 +28,14 @@ public class CProcessInput
 
                 if (enemy._line != 2)
                 {
-                    return;
+                    return true;
                 }
 
                 int value = (int)aValues;
 
                 int pitch = enemy._pitch;
 
-                Debug.Log("enemy pitch: " + pitch + "value: " + value);
+                //Debug.Log("enemy pitch: " + pitch + "value: " + value);
 
                 if (pitch == value)
                 {
@@ -54,7 +61,7 @@ public class CProcessInput
 
                 if (enemy._line != 1)
                 {
-                    return;
+                    return true;
                 }
                 bool leftInput = (bool)aValues;
 
@@ -74,11 +81,139 @@ public class CProcessInput
             case CSingingStage.DEVICE_JOYSTICK:
                 if (enemy._line != 3)
                 {
-                    return;
+                    return true;
                 }
 
-                break;
+                Vector2 directions = (Vector2)aValues;
 
+                int previous = (int)directions.x;
+                int current = (int)directions.y;
+
+                switch(previous)
+                {
+                    case CSingingStage.DIR_NORTH:
+                        if (enemy.ReturnRightStick())
+                        {
+                            if (current == CSingingStage.DIR_WEST)
+                            {
+                                //Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+                            }
+                            else if (current == CSingingStage.DIR_EAST)
+                            {
+                                // Wrong!.
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (current == CSingingStage.DIR_EAST)
+                            {
+                                // Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_WEST)
+                            {
+                                // Wrong!
+                                return false;
+                            }
+                        }
+                        break;
+                    case CSingingStage.DIR_WEST:
+                        if (enemy.ReturnRightStick())
+                        {
+                            if (current == CSingingStage.DIR_SOUTH)
+                            {
+                                //Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_NORTH)
+                            {
+                                // Wrong!.
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (current == CSingingStage.DIR_NORTH)
+                            {
+                                // Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_SOUTH)
+                            {
+                                // Wrong!
+                                return false;
+                            }
+                        }
+                        break;
+                    case CSingingStage.DIR_SOUTH:
+                        if (enemy.ReturnRightStick())
+                        {
+                            if (current == CSingingStage.DIR_EAST)
+                            {
+                                //Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_WEST)
+                            {
+                                // Wrong!.
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (current == CSingingStage.DIR_WEST)
+                            {
+                                // Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_EAST)
+                            {
+                                // Wrong!
+                                return false;
+                            }
+                        }
+                        break;
+                    case CSingingStage.DIR_EAST:
+                        if (enemy.ReturnRightStick())
+                        {
+                            if (current == CSingingStage.DIR_NORTH)
+                            {
+                                //Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_SOUTH)
+                            {
+                                // Wrong!.
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (current == CSingingStage.DIR_SOUTH)
+                            {
+                                // Hit!
+                                enemy.getHit(GUITAR_DAMAGE);
+
+                            }
+                            else if (current == CSingingStage.DIR_NORTH)
+                            {
+                                // Wrong!
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                break;
         }
+
+        return true;
     }
 }

@@ -26,6 +26,16 @@ public class CSingingStage : CStateBase
     public const int PITCH_MID = 1;
     public const int PITCH_HIGH = 2;
 
+    // Joystick directions
+    public const int DIR_NONE = -1;
+    public const int DIR_NORTH = 0;
+    public const int DIR_WEST = 1;
+    public const int DIR_SOUTH = 2;
+    public const int DIR_EAST = 3;
+
+    private int mCurrentDir = DIR_NONE;
+    private int mPreviousDir = DIR_NONE;
+
     // Current highlighted device.
     private int mCurrentDevice = -1;
 
@@ -57,6 +67,10 @@ public class CSingingStage : CStateBase
     private float mLastMousePos = 0;
 
     public Canvas _canvas;
+
+    public float _joystickMarginValue = 0.20f;
+    public float _joystickResetMarginValue = 0.07f;
+
 
     public override void init()
     {
@@ -188,14 +202,75 @@ public class CSingingStage : CStateBase
     {
         if (mPlayerOne != null)
         {
-            // Get current analog direction. Do stuff.
-            //mPlayerOne.Direction.;
-
             if (mPlayerOne.AnyButtonIsPressed)
             {
                 // Highlight if not highlighted.
                 updateHighlight(DEVICE_JOYSTICK);
             }
+
+            // Get current analog direction. Do stuff.
+            float currentX = mPlayerOne.Direction.X;
+            float currentY = mPlayerOne.Direction.Y;
+
+            bool didGood = true;
+
+            int previousCurrentDir = mCurrentDir;
+
+            // Close to Top
+            if (Mathf.Sqrt(Mathf.Pow(currentX, 2) + Mathf.Pow((1 - currentY), 2)) <= _joystickMarginValue)
+            {
+                Debug.Log("TOP!");
+
+                didGood = setDir(DIR_NORTH);
+            }
+            // Bot
+            else if(Mathf.Sqrt(Mathf.Pow(currentX, 2) + Mathf.Pow((1 + currentY), 2)) <= _joystickMarginValue)
+            {
+                Debug.Log("BOT!");
+                didGood = setDir(DIR_SOUTH);
+
+            }
+            // Right
+            else if (Mathf.Sqrt(Mathf.Pow(currentY, 2) + Mathf.Pow((1 - currentX), 2)) <= _joystickMarginValue)
+            {
+                Debug.Log("RIGHT!");
+                didGood = setDir(DIR_EAST);
+
+            }
+            // Left
+            else if (Mathf.Sqrt(Mathf.Pow(currentY, 2) + Mathf.Pow((1 + currentX), 2)) <= _joystickMarginValue)
+            {
+                Debug.Log("LEFT!");
+                didGood = setDir(DIR_WEST);
+
+            }
+            // Reset.
+            else if (mCurrentDir != DIR_NONE && 
+                Mathf.Sqrt(Mathf.Pow(currentX, 2) + Mathf.Pow(currentY, 2)) <= _joystickResetMarginValue)
+            {
+                Debug.Log("MIDDLE!");
+
+                // stop any vibration.
+                mPlayerOne.StopVibration();
+
+                mCurrentDir = DIR_NONE;
+            }
+
+            if (previousCurrentDir != mCurrentDir)
+            {
+                if (didGood)
+                {
+                    // stop any vibration.
+                    mPlayerOne.StopVibration();
+                }
+                else
+                {
+                    // wrong!
+                    Debug.Log("Vibrate!");
+                    mPlayerOne.Vibrate(0.70f);
+                }
+            }
+
 
             //if (Input.GetKeyDown(KeyCode.S))
             //{
@@ -215,6 +290,57 @@ public class CSingingStage : CStateBase
         //{
         //    _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
         //}
+    }
+
+    private bool setDir(int aDir)
+    {
+        if (mCurrentDir == DIR_NONE)
+        {
+            mCurrentDir = aDir;
+        }
+        else
+        {
+            switch (aDir)
+            {
+                case DIR_NORTH:
+                    if (mCurrentDir == DIR_SOUTH)
+                    {
+                        return true;
+                    }
+                    break;
+                case DIR_WEST:
+                    if (mCurrentDir == DIR_EAST)
+                    {
+                        return true;
+                    }
+                    break;
+                case DIR_SOUTH:
+                    if (mCurrentDir == DIR_NORTH)
+                    {
+                        return true;
+                    }
+                    break;
+                case DIR_EAST:
+                    if (mCurrentDir == DIR_WEST)
+                    {
+                        return true;
+                    }
+                    break;
+            }
+
+            // We have advanced.
+            mPreviousDir = mCurrentDir;
+
+            mCurrentDir = aDir;
+
+            // Send to proces.
+            if (mCurrentDevice == DEVICE_JOYSTICK)
+            {
+                return _inputProcessing.processInput(mCurrentDevice, new Vector2(mPreviousDir, mCurrentDir));
+            }
+        }
+
+        return true;
     }
 
     private void updateHighlight(int aType)
