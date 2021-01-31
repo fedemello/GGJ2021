@@ -12,7 +12,7 @@ public class CEnemyScroller : MonoBehaviour
     public float _spawnMinTimer;
     public float _spawnMaxTimer;
 
-    public int _cantidadMaxSpawn = 0;
+    public int _cantidadMaxSpawn = 20;
     public int _currentCantidadSpawn = 0;
     public float _porcentajeParaSobrevivir = 50f;
 
@@ -23,6 +23,7 @@ public class CEnemyScroller : MonoBehaviour
 
     private int _puntajeMaximo;
 
+    private int maxScore;
 
     public Transform _spawn1;
     public Transform _spawn2;
@@ -45,6 +46,8 @@ public class CEnemyScroller : MonoBehaviour
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
 
         _playerScore.setCurrentPercent(0.5f);
+
+        maxScore = _cantidadMaxSpawn * 50;
     }
 
     // Update is called once per frame
@@ -66,25 +69,33 @@ public class CEnemyScroller : MonoBehaviour
         float puntaje = ((float)CScoreManager.Inst._score) / 50;
         float cantEnemigosVivos = (float)CEnemyManager.Inst.cantEnemies();
 
-        float pointsRemaining = cantEnemigosVivos + (_cantidadMaxSpawn - _currentCantidadSpawn);
+        float enemigosTotales = cantEnemigosVivos + (_cantidadMaxSpawn - _currentCantidadSpawn) * 50;
 
-        float minimunScoreToWin = (float)_cantidadMaxSpawn / 2;
+        float minimunScoreToWin = ((float)_cantidadMaxSpawn * 50) / 2;
 
         //Debug.Log("Puntaje: " + punatje);
         //Debug.Log("Cantidad Eniemigos Vivos: " + cantEnemigosVivos);
         //Debug.Log("Puntos faltantes: " + pointsRemaining);
         //Debug.Log("Minimo puntaje para ganar: " + minimunScoreToWin);
 
-        _valorParaBarra = (float)(puntaje + pointsRemaining - minimunScoreToWin) / (float)(_cantidadMaxSpawn);
+        _valorParaBarra = (float)(puntaje + enemigosTotales - minimunScoreToWin) / (float)(_cantidadMaxSpawn * 50);
 
-        if (_valorParaBarra <= 0)
-        {
-            _valorParaBarra = 0f;
-        }
-        else if (_valorParaBarra >= 1)
-        {
-            _valorParaBarra = 1f;
-        }
+
+        // Min que es minimunSCoreToWin    max que es (_cantidadMaxSpawn * 50);
+        float value = puntaje + enemigosTotales; //Posible
+
+        _valorParaBarra = CMath.lerp(minimunScoreToWin, maxScore, 0, 1, value);
+
+        Debug.Log("valor: " + _valorParaBarra);
+
+        //if (_valorParaBarra <= 0)
+        //{
+        //    _valorParaBarra = 0f;
+        //}
+        //else if (_valorParaBarra >= 1)
+        //{
+        //    _valorParaBarra = 1f;
+        //}
 
         Debug.Log("Barra: " + _valorParaBarra);
         _playerScore.setCurrentPercent(_valorParaBarra);
@@ -94,7 +105,7 @@ public class CEnemyScroller : MonoBehaviour
 
 
 
-        if ((puntaje + pointsRemaining - minimunScoreToWin) <= 0)
+        if ((puntaje + enemigosTotales - minimunScoreToWin) <= 0)
         {
             _loseCondition = true;
             Debug.Log("LOSE");
