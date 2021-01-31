@@ -7,6 +7,9 @@ public class CEnemy : MonoBehaviour, ITriggered
     public static int _STATE_OFF = 0;
     public static int _STATE_ON = 1;
 
+    public static int _STATE_ON_STAIRS = 0;
+    public static int _STATE_OFF_STAIRS = 1;
+
 
     public Sprite _secondPhaseSprite;
 
@@ -23,13 +26,18 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private int _pace = 0; // de momento null
 
+    public float _lineY = 0f;
+
     public int _triggersPassed = 0;
 
     public bool canBePressed;
 
     public bool inputTriggered;
 
+    public float beatTempo = 0f;
+
     public int _state;
+    private int _movement_state;
 
     private Coroutine _activeCoroutine;
     
@@ -54,12 +62,26 @@ public class CEnemy : MonoBehaviour, ITriggered
     private void Start() 
     {
         SetState(_STATE_OFF);
+        SetMovementState(_STATE_ON_STAIRS);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (_movement_state == _STATE_ON_STAIRS)
+        {
+            transform.position -= new Vector3(beatTempo * Time.deltaTime, beatTempo * Time.deltaTime, 0f);
+        }
+        else
+        {
+            transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
+        }
+
+        CheckOffStair();
+
+
+
         if (_triggersPassed == 1)
         {
             SetState(_STATE_ON);
@@ -101,6 +123,11 @@ public class CEnemy : MonoBehaviour, ITriggered
         {
             this.transform.GetComponent<SpriteRenderer>().sprite = _secondPhaseSprite;
         }
+    }
+
+    public void SetMovementState(int aState)
+    {
+        _movement_state = aState;
     }
 
     public void Killed()
@@ -172,4 +199,16 @@ public class CEnemy : MonoBehaviour, ITriggered
 
         yield return null;
     }
+
+    private void CheckOffStair()
+    {
+        
+        if (transform.position.y <= _lineY)
+            SetMovementState(_STATE_OFF_STAIRS);
+
+    }
+
+
+
+
 }

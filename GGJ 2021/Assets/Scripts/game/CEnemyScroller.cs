@@ -41,7 +41,7 @@ public class CEnemyScroller : MonoBehaviour
         else
         {
             // Este movimiento se aplica a todos los enemigos simultaneamente
-            transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
+            //transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
     }
 
@@ -79,13 +79,20 @@ public class CEnemyScroller : MonoBehaviour
 
         int pitch = Random.Range(0, 3);
 
+        float posYOriginal = pos.y;
+
+        pos = new Vector3(pos.x, pos.y + beatTempo + 30, pos.x);
+
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
         
-        CEnemy enemyccc = enemy.GetComponent<CEnemy>();        
+        
+        CEnemy enemyccc = enemy.GetComponent<CEnemy>();
+        enemyccc.beatTempo = beatTempo;
 
         enemyccc._line = line;
         enemyccc._pitch = pitch;
+        enemyccc._lineY = posYOriginal;
 
         CEnemyManager.Inst.addEnemy(enemy.GetComponent<CEnemy>());
     }
