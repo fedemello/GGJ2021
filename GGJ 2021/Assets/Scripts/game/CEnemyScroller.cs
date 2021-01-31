@@ -49,8 +49,17 @@ public class CEnemyScroller : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
-        while (true)
+        bool spawning = true;
+
+        while (spawning)
         {
+            CStateBase state = CLevelManager.Inst.getCurrentState();
+
+            if (state != null && state.getState() == CSingingStage.STATE_ENDING)
+            {
+                spawning = false;
+            }
+
             int ran = Random.Range(1, 4);
 
             if (ran == 1)

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CEnemy : MonoBehaviour, ITriggered
 {
-    private Animator _anim;
-
     public static int _STATE_OFF = 0;
     public static int _STATE_ON = 1;
 
     public static int _STATE_ON_STAIRS = 0;
     public static int _STATE_OFF_STAIRS = 1;
-    public static int _STATE_DEATH = 2;
+
+
+    public Sprite _secondPhaseSprite;
 
     public int _line;
     public int _pitch;
@@ -44,11 +44,16 @@ public class CEnemy : MonoBehaviour, ITriggered
     private Coroutine _activeCoroutine;
 
     private List<int> _triggersActivated = new List<int>();
-    
+
+    public SpriteRenderer _leftEyeSpr;
+    public SpriteRenderer _middleEyeSpr;
+    public SpriteRenderer _rightEyeSpr;
+
+    public Color _leftCol;
+    public Color _rightCol;
+
     private void Awake() 
     {
-        _anim = GetComponent<Animator>();
-
         _leftEye = (Random.value > 0.5f);
         _middleEye = (Random.value > 0.5f);
         _rightEye = (Random.value > 0.5f);
@@ -79,16 +84,14 @@ public class CEnemy : MonoBehaviour, ITriggered
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, beatTempo * Time.deltaTime, 0f);
         }
-        else if (_movement_state == _STATE_DEATH)
-        {
-            transform.position = transform.position;
-        }
         else
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
 
         CheckOffStair();
+
+
 
         if (_triggersPassed == 1)
         {
@@ -135,6 +138,19 @@ public class CEnemy : MonoBehaviour, ITriggered
         if (_state == _STATE_ON)
         {
             _anim.SetTrigger("Trigger1");
+
+            _leftEyeSpr.gameObject.SetActive(true);
+            _middleEyeSpr.gameObject.SetActive(true);
+            _rightEyeSpr.gameObject.SetActive(true);
+
+            if (_line == 1)
+            {
+                _leftEyeSpr.color = _leftEye ? _leftCol : _rightCol;
+                _middleEyeSpr.color = _middleEye ? _leftCol : _rightCol;
+                _rightEyeSpr.color = _rightEye ? _leftCol : _rightCol;
+
+            }
+
         }
     }
 
@@ -197,10 +213,6 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator DestroyBySelfCoroutine()
     {
-        _anim.SetTrigger("Trigger2");
-
-        yield return new WaitForSeconds(0.5f);
-
         Destroy(this.gameObject);
         CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.BrokeCombo();
@@ -212,11 +224,6 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator KilledCoroutine()
     {
-        SetMovementState(_STATE_DEATH);
-        _anim.SetTrigger("Trigger2");
-
-        yield return new WaitForSeconds(0.5f);
-
         Destroy(this.gameObject);
         CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.AddToScore();
@@ -236,9 +243,6 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public void getHit(int aDamage, int pushAmount = 0)
     {
-        if (_movement_state == _STATE_DEATH)
-            return;
-        
         currentHealth -= aDamage;
 
         getPushed(pushAmount);
@@ -257,4 +261,5 @@ public class CEnemy : MonoBehaviour, ITriggered
     {
         transform.position += new Vector3(amount, 0f, 0f);
     }
+
 }

@@ -153,6 +153,11 @@ public class CStateBase : MonoBehaviour
         mTimeState = 0.0f;
     }
 
+    public int getState()
+    {
+        return mState;
+    }
+
     /// ------------------------------------------------------------------------------------------------------------------    
     /// <summary>
     /// Update function. Called every frame.
