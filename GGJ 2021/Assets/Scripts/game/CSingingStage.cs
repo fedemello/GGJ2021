@@ -98,6 +98,8 @@ public class CSingingStage : CStateBase
 
     private int mCurrentDrumSfx = 0;
 
+    public AudioClip _singingMusic;
+
     public override void init()
     {
         base.init();
@@ -117,6 +119,8 @@ public class CSingingStage : CStateBase
         {
             _camera.position = _cameraInicialPos;
             _intro.Intro();
+
+            CAudioManager.Inst.startMusic(_singingMusic);
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
