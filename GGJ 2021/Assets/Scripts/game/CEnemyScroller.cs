@@ -9,7 +9,9 @@ public class CEnemyScroller : MonoBehaviour
 
     public bool hasStarted = true;
 
-    public float _spawnTimer;
+    public float _spawnMinTimer;
+    public float _spawnMaxTimer;
+
 
     public Transform _spawn1;
     public Transform _spawn2;
@@ -54,19 +56,22 @@ public class CEnemyScroller : MonoBehaviour
             if (ran == 1)
             {
                 SpawnEnemy(_spawn1.position + _offset, 1);
-            }
 
+            }
             else if (ran == 2)
             {
                 SpawnEnemy(_spawn2.position + _offset, 2);
-            }
 
+            }
             else if (ran == 3)
             {
                 SpawnEnemy(_spawn3.position+ _offset, 3);
             }
 
-            yield return new WaitForSeconds(_spawnTimer);
+            // Hack para convocar solo en fila 3 comentando los if de ran. 
+            //SpawnEnemy(_spawn3.position + _offset, 3);
+
+            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer));
         }
 
         yield return null;
