@@ -8,6 +8,8 @@ public class CEnemy : MonoBehaviour, ITriggered
     public static int _STATE_ON = 1;
 
 
+    public Sprite _secondPhaseSprite;
+
     public int _line;
     public int _pitch;
 
@@ -94,6 +96,11 @@ public class CEnemy : MonoBehaviour, ITriggered
     public void SetState(int aState)
     {
         _state = aState;
+
+        if (_state == _STATE_ON)
+        {
+            this.transform.GetComponent<SpriteRenderer>().sprite = _secondPhaseSprite;
+        }
     }
 
     public void Killed()

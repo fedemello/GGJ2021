@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,20 @@ public class CustomTile : MonoBehaviour
     public Vector2 gridSize = new Vector2 (1,1);
     public bool Snap = true;
     private List <Vector2> _cantGo;
+
+    public SpriteRenderer _spr;
+    public Sprite _spriteOn;
+    public Sprite _spriteOff;
+
+    public void On()
+    {
+        _spr.sprite = _spriteOn;
+    }
+
+    public void Off()
+    {
+        _spr.sprite = _spriteOff;
+    }
 
     public void OnDrawGizmos() {
         if (Snap)
@@ -26,6 +40,7 @@ public class CustomTile : MonoBehaviour
         );
 
         this.transform.position = position;
+
     }
 
     public Vector2 GridPos()

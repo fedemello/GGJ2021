@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class CSingingStage : CStateBase
 {
+
+    //Music references
+    public CSinger _singer;
+    public CSinger _drumer;
+    public CSinger _guitarrist;
+
     // States.
     public const int STATE_INTRO = 0;
     public const int STATE_PLAYING = 1;
@@ -21,7 +27,7 @@ public class CSingingStage : CStateBase
     public const int PITCH_HIGH = 2;
 
     // Current highlighted device.
-    private int mCurrentDevice = DEVICE_MOUSE;
+    private int mCurrentDevice = -1;
 
     // Min distance to detect mouse movement.
     public float _mouseMinDistance = 30;
@@ -69,7 +75,7 @@ public class CSingingStage : CStateBase
 
         if (aState == STATE_INTRO)
         {
-
+            updateHighlight(DEVICE_MOUSE);
         }
         else if (aState == STATE_PLAYING)
         {
@@ -208,8 +214,41 @@ public class CSingingStage : CStateBase
             int previousHighlight = mCurrentDevice;
             // Unhighlight previous spot.
 
+            if (previousHighlight == DEVICE_MOUSE)
+            {
+                _singer.Off();
+                CLineManager.Inst.MidLineOff();
+            }
+            else if (previousHighlight == DEVICE_KEYBOARD)
+            {
+                _drumer.Off();
+                CLineManager.Inst.TopLineOff();
+            }
+            else if (previousHighlight == DEVICE_JOYSTICK)
+            {
+                _guitarrist.Off();
+                CLineManager.Inst.BottomLineOff();
+            }
+
             // Save new device.
             mCurrentDevice = aType;
+
+
+            if (mCurrentDevice == DEVICE_MOUSE)
+            {
+                _singer.On();
+                CLineManager.Inst.MidLineOn();
+            }
+            else if (mCurrentDevice == DEVICE_KEYBOARD)
+            {
+                _drumer.On();
+                CLineManager.Inst.TopLineOn();
+            }
+            else if (mCurrentDevice == DEVICE_JOYSTICK)
+            {
+                _guitarrist.On();
+                CLineManager.Inst.BottomLineOn();
+            }
 
             //Highlight new device.
             Debug.Log("new device: " + mCurrentDevice);
