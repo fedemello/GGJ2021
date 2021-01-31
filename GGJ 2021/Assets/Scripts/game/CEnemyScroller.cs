@@ -64,17 +64,17 @@ public class CEnemyScroller : MonoBehaviour
 
             if (ran == 1)
             {
-                SpawnEnemy(_spawn1.position + _offset, 1);
+                SpawnEnemy(_spawn1.position + _offset, 1, 45);
 
             }
             else if (ran == 2)
             {
-                SpawnEnemy(_spawn2.position + _offset, 2);
+                SpawnEnemy(_spawn2.position + _offset, 2, 47);
 
             }
             else if (ran == 3)
             {
-                SpawnEnemy(_spawn3.position + _offset, 3);
+                SpawnEnemy(_spawn3.position + _offset, 3, 49);
             }
 
             // Hack para convocar en una sola fila comentando los if de ran. 
@@ -86,7 +86,7 @@ public class CEnemyScroller : MonoBehaviour
         yield return null;
     }
 
-    public void SpawnEnemy(Vector3 pos, int line)
+    public void SpawnEnemy(Vector3 pos, int line, int sorting)
     {
         // Spawnea a un enemigo en la ubicacíon pasasda por paramentro
         // Y se agrega al manager de enemigos
@@ -95,11 +95,11 @@ public class CEnemyScroller : MonoBehaviour
 
         float posYOriginal = pos.y;
 
-        pos = new Vector3(pos.x, pos.y + beatTempo + 30, pos.x);
+        pos = new Vector3(pos.x, pos.y + beatTempo + 30, pos.z);
 
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
-        
+        enemy.GetComponent<SpriteRenderer>().sortingOrder = sorting;
         
         CEnemy enemyccc = enemy.GetComponent<CEnemy>();
         enemyccc.beatTempo = beatTempo;
