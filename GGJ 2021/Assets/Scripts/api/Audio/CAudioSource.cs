@@ -23,12 +23,13 @@ public class CAudioSource
         _id = aId;
         _gameObject = new GameObject(aId);
 
-        _volumen = aVolume;
+        
 
         _source = _gameObject.AddComponent<AudioSource>();
-        _source.volume = _volumen;
         _source.minDistance = 2690.9f;
         _source.maxDistance = 2717.8f;
+
+        setVolume(aVolume);
 
         _parent = aParent;
 
@@ -76,6 +77,12 @@ public class CAudioSource
     public bool isPlaying()
     {
         return _playing;
+    }
+
+    public void setVolume(float aVolume)
+    {
+        _volumen = Mathf.Clamp(aVolume, 0, 1);
+        _source.volume = _volumen;
     }
 
     public void destroy()

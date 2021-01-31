@@ -27,7 +27,7 @@ public class CAudioManager : MonoBehaviour
     //private CAudioSource _sfx;
 
     private float _volumeMusic = 0.3f;
-    private float _volumeSfx = 0.5f;
+    private const float _volumeSfx = 0.5f;
 
     public void Awake()
     {
@@ -83,7 +83,7 @@ public class CAudioManager : MonoBehaviour
     }
     
 
-    public void playSfx(string id, AudioClip aSfx, bool onlyOnce = false)
+    public void playSfx(string id, AudioClip aSfx, float aVolume = _volumeSfx, bool onlyOnce = false)
     {
         if (onlyOnce && isSfxPlaying(id))
         {
@@ -91,10 +91,10 @@ public class CAudioManager : MonoBehaviour
             return;
         }
 
-        createSfx(id, aSfx);
+        createSfx(id, aSfx, _volumeSfx);
     }
 
-    private void createSfx(string aId, AudioClip aSfx)
+    private void createSfx(string aId, AudioClip aSfx, float aVolume = 1)
     {
         string id = aId;
         int i = 0;
@@ -104,7 +104,7 @@ public class CAudioManager : MonoBehaviour
             id = aId + i.ToString();
         }
 
-        CAudioSource source = new CAudioSource(id, _volumeSfx, gameObject);
+        CAudioSource source = new CAudioSource(id, aVolume, gameObject);
 
         source.playAudio(aSfx, false);
         _sfxs.Add(source);
@@ -121,6 +121,17 @@ public class CAudioManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void setSfxVolume(string aId, float aVolume)
+    {
+        for (int i = 0; i < _sfxs.Count; i++)
+        {
+            if (_sfxs[i].getId() == aId)
+            {
+                _sfxs[i].setVolume(aVolume);
+            }
+        }
     }
 
     public void stopSfx(string aId)
