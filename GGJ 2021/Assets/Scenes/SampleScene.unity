@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95552106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 104, y: -48, z: 0}
+  m_LocalPosition: {x: 64.4, y: -48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -577,6 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475231870}
   - component: {fileID: 475231869}
+  - component: {fileID: 475231871}
   m_Layer: 0
   m_Name: Piso2
   m_TagString: Untagged
@@ -649,6 +650,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475231871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475231868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f82a30177d5062499a25ec552cda12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spr: {fileID: 0}
+  _spriteOn: {fileID: 21300000, guid: fc8a9239096efdc4f91c1f5af6f07032, type: 3}
+  _spriteOff: {fileID: 21300000, guid: 106844eb296f7c64ea88ea289e97ffda, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602088920}
   - component: {fileID: 1602088919}
+  - component: {fileID: 1602088921}
   m_Layer: 0
   m_Name: Piso3
   m_TagString: Untagged
@@ -1877,6 +1894,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1602088921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602088918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f82a30177d5062499a25ec552cda12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spr: {fileID: 0}
+  _spriteOn: {fileID: 21300000, guid: 98e51495aa8836c439d52bd6cc278d20, type: 3}
+  _spriteOff: {fileID: 21300000, guid: 83c765d9638fe11499a1fd446b5974cf, type: 3}
 --- !u!1 &1735219677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1750598695}
   - component: {fileID: 1750598694}
+  - component: {fileID: 1750598696}
   m_Layer: 0
   m_Name: Piso1
   m_TagString: Untagged
@@ -2056,6 +2089,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750598696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750598693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f82a30177d5062499a25ec552cda12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spr: {fileID: 0}
+  _spriteOn: {fileID: 21300000, guid: f500d45e001473a4c8b462f57d67db89, type: 3}
+  _spriteOff: {fileID: 21300000, guid: 309f01d5c3d35c84c9e96a52ffbc64e5, type: 3}
 --- !u!1 &1990952205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,9 +2244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5a0f0c03233d40af19dfb9ba34b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _topLine: []
-  _midLine: []
-  _botLine: []
+  _topLine:
+  - {fileID: 1750598696}
+  _midLine:
+  - {fileID: 475231871}
+  _botLine:
+  - {fileID: 1602088921}
 --- !u!1 &2082221448
 GameObject:
   m_ObjectHideFlags: 0
