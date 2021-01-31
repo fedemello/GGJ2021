@@ -1,4 +1,4 @@
 ﻿public interface ITriggered
 {
-    void onTrigger(int numb);
+    void onTrigger(int numb, int id);
 }

@@ -42,6 +42,8 @@ public class CEnemy : MonoBehaviour, ITriggered
     private int currentHealth = 100;
 
     private Coroutine _activeCoroutine;
+
+    private List<int> _triggersActivated = new List<int>();
     
     private void Awake() 
     {
@@ -112,9 +114,14 @@ public class CEnemy : MonoBehaviour, ITriggered
         }
     }
 
-    public void onTrigger(int trig)
+    public void onTrigger(int trig, int id)
     {
-        _triggersPassed += trig;
+        if (!_triggersActivated.Contains(id))
+        {
+            _triggersPassed += trig;
+
+            _triggersActivated.Add(id);
+        }
     }
     
     public void SetState(int aState)
