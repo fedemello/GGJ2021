@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class CSinger : MonoBehaviour
 {
-    private SpriteRenderer _spr;
-
-    public Sprite _spriteOn;
-    public Sprite _spriteOff;
+    private Animator _anim;
 
     private void Awake() 
     {
-        _spr = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
         Off();
     }
 
     public void On()
     {
-        _spr.sprite = _spriteOn;
+        _anim.SetBool("On", true);
     }
+
     public void Off()
     {
-        _spr.sprite = _spriteOff;
+        _anim.SetBool("On", false);
     }
 }

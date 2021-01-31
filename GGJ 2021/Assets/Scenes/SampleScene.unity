@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 206948536}
   - component: {fileID: 206948535}
   - component: {fileID: 206948537}
+  - component: {fileID: 206948538}
   m_Layer: 0
   m_Name: Banshee
   m_TagString: Untagged
@@ -384,7 +385,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: e4d90d4a2e7f4ee47b1af7a6e8d93a55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73bfb092998497542b3f2a27f579a385, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -403,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206948534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -133, y: -58, z: 0}
+  m_LocalPosition: {x: -122, y: -58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -421,8 +422,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498f0048b4f4cb34dabe43ca834cad31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteOn: {fileID: 21300000, guid: 5c7c89f5c8308f64ab03751b43578459, type: 3}
-  _spriteOff: {fileID: 21300000, guid: e4d90d4a2e7f4ee47b1af7a6e8d93a55, type: 3}
+--- !u!95 &206948538
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206948534}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 982ca88de77ff5e498207da4847db7d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &319526729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1925,6 +1943,7 @@ GameObject:
   - component: {fileID: 1735219679}
   - component: {fileID: 1735219678}
   - component: {fileID: 1735219680}
+  - component: {fileID: 1735219681}
   m_Layer: 0
   m_Name: ZombieBoy
   m_TagString: Untagged
@@ -1972,12 +1991,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 9275fb4ffc1ee4249bdbaa7206dbb1fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 754be1bbbc6cabf48ac3deb70e66050b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 52, y: 75}
+  m_Size: {x: 142, y: 93}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1991,7 +2010,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735219677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103, y: -77, z: 0}
+  m_LocalPosition: {x: -127, y: -77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2009,8 +2028,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498f0048b4f4cb34dabe43ca834cad31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteOn: {fileID: 21300000, guid: 1e34c425125a1cd4a8c46c84804cb507, type: 3}
-  _spriteOff: {fileID: 21300000, guid: 9275fb4ffc1ee4249bdbaa7206dbb1fa, type: 3}
+--- !u!95 &1735219681
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735219677}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 567fe7649a3929a4983f2985842945d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1750598693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2156,7 @@ GameObject:
   - component: {fileID: 1990952207}
   - component: {fileID: 1990952206}
   - component: {fileID: 1990952208}
+  - component: {fileID: 1990952209}
   m_Layer: 0
   m_Name: Nosferatu
   m_TagString: Untagged
@@ -2167,12 +2204,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 5cf0d8e0870cb5d49a4fdbb67c1bf96b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e3cff1b3e22dbb4695117057b52ddb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 81, y: 81}
+  m_Size: {x: 177, y: 83}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2186,7 +2223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990952205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -71, y: -34, z: 0}
+  m_LocalPosition: {x: -92, y: -34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2204,8 +2241,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498f0048b4f4cb34dabe43ca834cad31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteOn: {fileID: 21300000, guid: 4cb63eda421d55549bc9c172ac8c4a68, type: 3}
-  _spriteOff: {fileID: 21300000, guid: 5cf0d8e0870cb5d49a4fdbb67c1bf96b, type: 3}
+--- !u!95 &1990952209
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990952205}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f33385fa75454c34dbe802ac57625f15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2036906740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,6 +2356,10 @@ MonoBehaviour:
   hasStarted: 1
   _spawnMinTimer: 1.2
   _spawnMaxTimer: 2
+  _cantidadMaxSpawn: 0
+  _currentCantidadSpawn: 0
+  _porcentajeParaSobrevivir: 50
+  _valorParaBarra: 0
   _spawn1: {fileID: 451204157}
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
