@@ -81,6 +81,12 @@ public class CSingingStage : CStateBase
     public float _joystickMarginValue = 0.20f;
     public float _joystickResetMarginValue = 0.07f;
 
+    public AudioClip _singing;
+    public AudioClip _drums;
+    public AudioClip _guitar;
+
+    public float _standardVolume = 0.2f;
+    public float _highlightedVolume = 0.8f;
 
     public override void init()
     {
@@ -99,6 +105,11 @@ public class CSingingStage : CStateBase
 
         if (aState == STATE_INTRO)
         {
+
+            CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
+            CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
+            CAudioManager.Inst.playSfx("guitar", _guitar, _standardVolume);
+            
             updateHighlight(DEVICE_MOUSE);
         }
         else if (aState == STATE_PLAYING)
@@ -108,6 +119,8 @@ public class CSingingStage : CStateBase
         else if (aState == STATE_ENDING)
         {
             Debug.Log("END!");
+
+            mPlayerOne.StopVibration();
         }
     }
 
@@ -352,22 +365,30 @@ public class CSingingStage : CStateBase
         if (mCurrentDevice != aType)
         {
             int previousHighlight = mCurrentDevice;
-            // Unhighlight previous spot.
 
+            // Unhighlight previous spot.
             if (previousHighlight == DEVICE_MOUSE)
             {
                 _singer.Off();
                 CLineManager.Inst.MidLineOff();
+
+                CAudioManager.Inst.setSfxVolume("sing", _standardVolume);
             }
             else if (previousHighlight == DEVICE_KEYBOARD)
             {
                 _drumer.Off();
                 CLineManager.Inst.TopLineOff();
+
+                CAudioManager.Inst.setSfxVolume("drum", _standardVolume);
             }
             else if (previousHighlight == DEVICE_JOYSTICK)
             {
                 _guitarrist.Off();
                 CLineManager.Inst.BottomLineOff();
+
+                CAudioManager.Inst.setSfxVolume("guitar", _standardVolume);
+
+                mPlayerOne.StopVibration();
             }
 
             // Save new device.
@@ -378,21 +399,29 @@ public class CSingingStage : CStateBase
             {
                 _singer.On();
                 CLineManager.Inst.MidLineOn();
+
+                CAudioManager.Inst.setSfxVolume("sing", _highlightedVolume);
+
             }
             else if (mCurrentDevice == DEVICE_KEYBOARD)
             {
                 _drumer.On();
                 CLineManager.Inst.TopLineOn();
+
+                CAudioManager.Inst.setSfxVolume("drum", _highlightedVolume);
+
             }
             else if (mCurrentDevice == DEVICE_JOYSTICK)
             {
                 _guitarrist.On();
                 CLineManager.Inst.BottomLineOn();
+
+                CAudioManager.Inst.setSfxVolume("guitar", _highlightedVolume);
+
             }
 
             //Highlight new device.
             Debug.Log("new device: " + mCurrentDevice);
-
 
             if (previousHighlight == DEVICE_MOUSE)
             {
