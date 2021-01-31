@@ -137,7 +137,7 @@ public class CEnemy : MonoBehaviour, ITriggered
 
         if (_state == _STATE_ON)
         {
-            this.transform.GetComponent<SpriteRenderer>().sprite = _secondPhaseSprite;
+            _anim.SetTrigger("Trigger1");
 
             _leftEyeSpr.gameObject.SetActive(true);
             _middleEyeSpr.gameObject.SetActive(true);
