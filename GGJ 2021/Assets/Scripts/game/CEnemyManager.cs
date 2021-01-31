@@ -86,4 +86,9 @@ public class CEnemyManager : MonoBehaviour
     {
         return _firstEnemy;
     }
+
+    public int cantEnemies()
+    {
+        return _enemies.Count;
+    }
 }
