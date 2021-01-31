@@ -227,7 +227,7 @@ public class CEnemy : MonoBehaviour, ITriggered
     private IEnumerator DestroyBySelfCoroutine()
     {
         SetMovementState(_STATE_DEATH);
-        _anim.SetTrigger("Trigger2");
+        _anim.SetTrigger("Trigger3");
         CEnemyManager.Inst.ImOut(this);
         EyesOff();
 
