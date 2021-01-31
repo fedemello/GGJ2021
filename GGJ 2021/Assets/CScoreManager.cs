@@ -11,9 +11,18 @@ public class CScoreManager : MonoBehaviour
     public int _basicPoints;
     public int _comboPoints;
     public int _currentCombo = 0;
-    private int _endCombo = 0;
+    private int _endCombo = 100;
     public int _score;
     private int _maxScore;
+
+
+    private int mCurrentClassification = -1;
+
+    public List<Sprite> mScores = new List<Sprite>();
+
+    public SpriteRenderer _scoreText;
+
+    public CEnemyScroller mScroller;
 
     public static CScoreManager Inst
     {
@@ -39,12 +48,22 @@ public class CScoreManager : MonoBehaviour
 
     private void Update() 
     {
-        _textScore.text = ("Score: " + _score.ToString());
+        int clas = Classification();
 
-        if(Input.GetKeyDown(KeyCode.W))
+
+
+        if (mCurrentClassification != clas)
         {
-            AddToScore();
+            _scoreText.sprite = mScores[clas];
+
+            mCurrentClassification = clas;
         }
+        //_textScore.text = ("Score: " + _score.ToString());
+
+        //if(Input.GetKeyDown(KeyCode.W))
+        //{
+        //    AddToScore();
+        //}
     }
 
     public void AddToScore()
@@ -64,40 +83,42 @@ public class CScoreManager : MonoBehaviour
         _endCombo = _currentCombo;
     }
 
-    public string Classification()
+    public int Classification()
     {
-        string clasy = null;
+        int clasy = 0;
 
-        float percentaje = (_endCombo * 100)/_maxScore;
+        _maxScore = mScroller._cantidadMaxSpawn * 50;
+
+        float percentaje = (_score * 100)/_maxScore;
 
         if (_endCombo == _maxScore)
         {
-            clasy = "S++";
+            clasy = 5;
         }
         
         else if (percentaje >= 95)
         {
-            clasy = "S";
+            clasy = 4;
         } 
         
         else if (percentaje >= 90)
         {
-            clasy = "A";
+            clasy = 3;
         }
 
         else if (percentaje >= 80)
         {
-            clasy = "B";
+            clasy = 2;
         }
 
         else if (percentaje >= 70)
         {
-            clasy = "C";
+            clasy = 1;
         }
 
         else if (percentaje >= 60)
         {
-            clasy = "D";
+            clasy = 0;
         }
 
         return clasy;
