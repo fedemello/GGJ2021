@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -242182125
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 99d1b618d9ee5a247a4a752bdea30628, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,9 +99,11 @@ MonoBehaviour:
   _secondPhaseSprite: {fileID: 21300000, guid: c350b6016c6cb0e4eabcf786f53ccdd5, type: 3}
   _line: 0
   _pitch: 0
+  _lineY: 0
   _triggersPassed: 0
   canBePressed: 0
   inputTriggered: 0
+  beatTempo: 0
   _state: 0
 --- !u!61 &2132229439994423398
 BoxCollider2D:
