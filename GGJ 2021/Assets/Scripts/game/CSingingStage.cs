@@ -350,6 +350,8 @@ public class CSingingStage : CStateBase
             // Highlight if not highlighted.
             updateHighlight(DEVICE_JOYSTICK);
 
+            //Anim guitar -------------------------------------------------
+
             // Send to proces.
             if (mCurrentDevice == DEVICE_JOYSTICK)
             {

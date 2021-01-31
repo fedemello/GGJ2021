@@ -8,7 +8,6 @@ public class CProcessInput
     public bool processInput(int aType, object aValues, int aDamage = 0, int aPush = 0)
     {
 
-
         CEnemy enemy = CEnemyManager.Inst.FirstEnemy();
 
         if (enemy == null)
