@@ -33,6 +33,16 @@ public class CSingingStage : CStateBase
     public const int DIR_SOUTH = 2;
     public const int DIR_EAST = 3;
 
+    // Device damage amounts.
+    public int DAMAGE_SING = 4;
+    public int DAMAGE_GUITAR = 25;
+
+
+    // Device push amounts.
+    public const int PUSH_SING = 1;
+    public const int PUSH_DRUM = 10;
+    public const int PUSH_GUITAR = 5;
+
     private int mCurrentDir = DIR_NONE;
     private int mPreviousDir = DIR_NONE;
 
@@ -97,7 +107,7 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_ENDING)
         {
-
+            Debug.Log("END!");
         }
     }
 
@@ -114,10 +124,14 @@ public class CSingingStage : CStateBase
         {
             // Check controllers
             checkControllerInput();
+
+            if (!CAudioManager.Inst.isMusicPlaying())
+            {
+                setState(STATE_ENDING);
+            }
         }
         else if (mState == STATE_ENDING)
         {
-
         }
     }
 
@@ -167,32 +181,38 @@ public class CSingingStage : CStateBase
 
         if (mCurrentDevice == DEVICE_MOUSE)
         {
-            _inputProcessing.processInput(mCurrentDevice, mCurrentPitch);
+            _inputProcessing.processInput(mCurrentDevice, mCurrentPitch, DAMAGE_SING, PUSH_SING);
         }
     }
 
     private void keyboardLogic()
     {
+        bool pressed = false;
+
         if (Input.GetKeyDown(KeyCode.N))
         {
-            //Left button
             updateHighlight(DEVICE_KEYBOARD);
 
+            //Left button
             mPressedLeftDrum = true;
+
+            pressed = true;
         }
         else if (Input.GetKeyDown(KeyCode.M))
         {
-            //Right button
             updateHighlight(DEVICE_KEYBOARD);
 
+            //Right button
             mPressedLeftDrum = false;
+
+            pressed = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             // Pause?
         }
 
-        if (mCurrentDevice == DEVICE_KEYBOARD)
+        if (pressed && mCurrentDevice == DEVICE_KEYBOARD)
         {
             _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
         }
@@ -270,26 +290,7 @@ public class CSingingStage : CStateBase
                     mPlayerOne.Vibrate(0.70f);
                 }
             }
-
-
-            //if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    mPlayerOne.Vibrate(1);
-            //}
-            //else if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    mPlayerOne.Vibrate(0, 5);
-            //}
-            //else if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    mPlayerOne.StopVibration();
-            //}
         }
-
-        //if (mCurrentDevice == DEVICE_JOYSTICK)
-        //{
-        //    _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
-        //}
     }
 
     private bool setDir(int aDir)
@@ -333,10 +334,13 @@ public class CSingingStage : CStateBase
 
             mCurrentDir = aDir;
 
+            // Highlight if not highlighted.
+            updateHighlight(DEVICE_JOYSTICK);
+
             // Send to proces.
             if (mCurrentDevice == DEVICE_JOYSTICK)
             {
-                return _inputProcessing.processInput(mCurrentDevice, new Vector2(mPreviousDir, mCurrentDir));
+                return _inputProcessing.processInput(mCurrentDevice, new Vector2(mPreviousDir, mCurrentDir), DAMAGE_GUITAR, PUSH_GUITAR);
             }
         }
 

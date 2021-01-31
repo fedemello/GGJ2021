@@ -162,6 +162,9 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public bool popEye()
     {
+        // Get getPushed.
+        getPushed(CSingingStage.PUSH_DRUM);
+
         if (mCurrentEye == 1)
         {
             // Pop first eye
@@ -176,7 +179,8 @@ public class CEnemy : MonoBehaviour, ITriggered
 
             return true;
         }
-
+        
+        // Increment current eye.
         mCurrentEye += 1;
 
         return false;
@@ -217,9 +221,11 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     }
 
-    public void getHit(int aDamage)
+    public void getHit(int aDamage, int pushAmount = 0)
     {
         currentHealth -= aDamage;
+
+        getPushed(pushAmount);
 
         Debug.Log("hit! health: " + currentHealth);
 
@@ -229,6 +235,11 @@ public class CEnemy : MonoBehaviour, ITriggered
 
             Killed();
         }
+    }
+
+    public void getPushed(int amount)
+    {
+        transform.position += new Vector3(amount, 0f, 0f);
     }
 
 }

@@ -65,11 +65,11 @@ public class CEnemyScroller : MonoBehaviour
             }
             else if (ran == 3)
             {
-                SpawnEnemy(_spawn3.position+ _offset, 3);
+                SpawnEnemy(_spawn3.position + _offset, 3);
             }
 
-            // Hack para convocar solo en fila 3 comentando los if de ran. 
-            //SpawnEnemy(_spawn3.position + _offset, 3);
+            // Hack para convocar en una sola fila comentando los if de ran. 
+            //SpawnEnemy(_spawn2.position + _offset, 2);
 
             yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer));
         }

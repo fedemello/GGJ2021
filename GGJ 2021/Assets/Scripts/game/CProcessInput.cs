@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CProcessInput
 {
-    public int GUITAR_DAMAGE = 25;
-    public bool processInput(int aType, object aValues)
+
+    public bool processInput(int aType, object aValues, int aDamage = 0, int aPush = 0)
     {
 
 
@@ -39,7 +39,7 @@ public class CProcessInput
 
                 if (pitch == value)
                 {
-                    enemy.Killed();
+                    enemy.getHit(aDamage, aPush);
                 }
 
                 // Audio variance.
@@ -97,7 +97,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_WEST)
                             {
                                 //Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
                             }
                             else if (current == CSingingStage.DIR_EAST)
                             {
@@ -110,7 +110,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_EAST)
                             {
                                 // Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_WEST)
@@ -126,7 +126,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_SOUTH)
                             {
                                 //Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_NORTH)
@@ -140,7 +140,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_NORTH)
                             {
                                 // Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_SOUTH)
@@ -156,7 +156,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_EAST)
                             {
                                 //Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_WEST)
@@ -170,7 +170,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_WEST)
                             {
                                 // Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_EAST)
@@ -186,7 +186,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_NORTH)
                             {
                                 //Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_SOUTH)
@@ -200,7 +200,7 @@ public class CProcessInput
                             if (current == CSingingStage.DIR_SOUTH)
                             {
                                 // Hit!
-                                enemy.getHit(GUITAR_DAMAGE);
+                                enemy.getHit(aDamage, aPush);
 
                             }
                             else if (current == CSingingStage.DIR_NORTH)
