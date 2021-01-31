@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CEnemy : MonoBehaviour, ITriggered
 {
+    private Animator _anim;
+
     public static int _STATE_OFF = 0;
     public static int _STATE_ON = 1;
 
     public static int _STATE_ON_STAIRS = 0;
     public static int _STATE_OFF_STAIRS = 1;
-
-
-    public Sprite _secondPhaseSprite;
+    public static int _STATE_DEATH = 2;
 
     public int _line;
     public int _pitch;
@@ -47,6 +47,8 @@ public class CEnemy : MonoBehaviour, ITriggered
     
     private void Awake() 
     {
+        _anim = GetComponent<Animator>();
+
         _leftEye = (Random.value > 0.5f);
         _middleEye = (Random.value > 0.5f);
         _rightEye = (Random.value > 0.5f);
@@ -77,14 +79,16 @@ public class CEnemy : MonoBehaviour, ITriggered
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, beatTempo * Time.deltaTime, 0f);
         }
+        else if (_movement_state == _STATE_DEATH)
+        {
+            transform.position = transform.position;
+        }
         else
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
 
         CheckOffStair();
-
-
 
         if (_triggersPassed == 1)
         {
@@ -130,7 +134,7 @@ public class CEnemy : MonoBehaviour, ITriggered
 
         if (_state == _STATE_ON)
         {
-            this.transform.GetComponent<SpriteRenderer>().sprite = _secondPhaseSprite;
+            _anim.SetTrigger("Trigger1");
         }
     }
 
@@ -193,6 +197,10 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator DestroyBySelfCoroutine()
     {
+        _anim.SetTrigger("Trigger2");
+
+        yield return new WaitForSeconds(0.5f);
+
         Destroy(this.gameObject);
         CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.BrokeCombo();
@@ -204,6 +212,11 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     private IEnumerator KilledCoroutine()
     {
+        SetMovementState(_STATE_DEATH);
+        _anim.SetTrigger("Trigger2");
+
+        yield return new WaitForSeconds(0.5f);
+
         Destroy(this.gameObject);
         CEnemyManager.Inst.ImOut(this);
         CScoreManager.Inst.AddToScore();
@@ -223,6 +236,9 @@ public class CEnemy : MonoBehaviour, ITriggered
 
     public void getHit(int aDamage, int pushAmount = 0)
     {
+        if (_movement_state == _STATE_DEATH)
+            return;
+        
         currentHealth -= aDamage;
 
         getPushed(pushAmount);
@@ -241,5 +257,4 @@ public class CEnemy : MonoBehaviour, ITriggered
     {
         transform.position += new Vector3(amount, 0f, 0f);
     }
-
 }
