@@ -171,6 +171,11 @@ public class CSingingStage : CStateBase
         {
             // Pause?
         }
+
+        if (mCurrentDevice == DEVICE_KEYBOARD)
+        {
+            _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
+        }
     }
 
     private void joystickLogic()
@@ -199,6 +204,11 @@ public class CSingingStage : CStateBase
             //    mPlayerOne.StopVibration();
             //}
         }
+
+        //if (mCurrentDevice == DEVICE_JOYSTICK)
+        //{
+        //    _inputProcessing.processInput(mCurrentDevice, mPressedLeftDrum);
+        //}
     }
 
     private void updateHighlight(int aType)
