@@ -10,6 +10,10 @@ public class CSingingStage : CStateBase
     public CSinger _singer;
     public CSinger _drumer;
     public CSinger _guitarrist;
+    public Transform _camera;
+    public Vector3 _cameraInicialPos;
+    public CIntro _intro;
+    public bool _endedIntro = false;
 
     // States.
     public const int STATE_INTRO = 0;
@@ -57,6 +61,7 @@ public class CSingingStage : CStateBase
     private float mTopLine;
     private float mBotLine;
 
+    public CEnemyScroller _enemyScroller;
 
     private int mCurrentPitch = PITCH_MID;
 
@@ -110,15 +115,20 @@ public class CSingingStage : CStateBase
 
         if (aState == STATE_INTRO)
         {
+            _camera.position = _cameraInicialPos;
+            _intro.Intro();
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
             CAudioManager.Inst.playSfx("guitar", _guitar, _standardVolume);
+
+            StartCoroutine(IntroCoroutine());
             
             updateHighlight(DEVICE_MOUSE);
         }
         else if (aState == STATE_PLAYING)
         {
+            _enemyScroller.Spawn();
         }
         else if (aState == STATE_ENDING)
         {
@@ -131,6 +141,15 @@ public class CSingingStage : CStateBase
         }
     }
 
+    public IEnumerator IntroCoroutine()
+    {
+        yield return new WaitForSeconds(6.5f);
+
+        _endedIntro = true;
+
+        yield return null;
+    }
+
     public override void update()
     {
         base.update();
@@ -138,7 +157,15 @@ public class CSingingStage : CStateBase
         if (mState == STATE_INTRO)
         {
             // No intro for now.
-            setState(STATE_PLAYING);
+
+            if (_endedIntro)
+            {
+                if (Input.anyKeyDown)
+                {
+                    setState(STATE_PLAYING);
+                    Destroy(_intro.gameObject);
+                }
+            }
         }
         else if (mState == STATE_PLAYING)
         {

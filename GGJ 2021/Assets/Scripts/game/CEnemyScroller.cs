@@ -43,11 +43,14 @@ public class CEnemyScroller : MonoBehaviour
 
         _puntajeMaximo = CScoreManager.Inst.getMaxScore();
 
-        _activeCoroutine = StartCoroutine(SpawnCoroutine());
-
         _playerScore.setCurrentPercent(0.5f);
 
         maxScore = _cantidadMaxSpawn * 50;
+    }
+
+    public void Spawn()
+    {
+        _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
     // Update is called once per frame
