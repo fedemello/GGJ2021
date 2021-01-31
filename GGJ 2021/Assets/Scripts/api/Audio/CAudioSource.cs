@@ -12,7 +12,7 @@ public class CAudioSource
 
     private float _volumen;
 
-    private bool _playing;
+    private bool _playing = false;
     private bool _loops;
 
     private GameObject _parent;
@@ -73,6 +73,10 @@ public class CAudioSource
         return false;
     }
 
+    public bool isPlaying()
+    {
+        return _playing;
+    }
 
     public void destroy()
     {

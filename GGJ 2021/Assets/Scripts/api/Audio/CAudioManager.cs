@@ -59,17 +59,29 @@ public class CAudioManager : MonoBehaviour
                 _sfxs.Remove(source);
             }
         }
+
+        if (_music.isPlaying() && _music.finishedPlaying())
+        {
+            //_music.
+            Debug.Log("music ended!");
+        }
     }
+
 
     public void startMusic(AudioClip aAudioClip, bool aLoop = true)
     {
         _music.playAudio(aAudioClip, aLoop);
     }
 
+    public bool isMusicPlaying()
+    {
+        return _music.isPlaying();
+    }
     public bool isMusicPlaying(AudioClip aClip)
     {
         return _music.getAudioClip() == aClip;
     }
+    
 
     public void playSfx(string id, AudioClip aSfx, bool onlyOnce = false)
     {

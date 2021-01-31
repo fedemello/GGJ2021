@@ -49,7 +49,6 @@ public class CStateBase : MonoBehaviour
     // Public variables to set at each menu.
     public AudioClip _musica;
 
-    [HideInInspector]
     public bool _loopMusic = true;
 
     [HideInInspector]

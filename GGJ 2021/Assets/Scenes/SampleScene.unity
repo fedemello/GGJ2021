@@ -3447,8 +3447,8 @@ MonoBehaviour:
   STICK_OFFSET: 0.7
   TICK_DELAY: 0.3
   BACK_STICK_OFFSET: 0.25
-  _musica: {fileID: 8300000, guid: 4136db6f5d487c847a14c45796be1c58, type: 3}
-  _loopMusic: 1
+  _musica: {fileID: 8300000, guid: f1b0c84d79b8171409c1394316c9e149, type: 3}
+  _loopMusic: 0
   _selectorPrefab1: {fileID: 0}
   _selectorPrefab2: {fileID: 0}
   _background: {fileID: 0}
@@ -3461,10 +3461,14 @@ MonoBehaviour:
   _singer: {fileID: 206948537}
   _drumer: {fileID: 1990952208}
   _guitarrist: {fileID: 1735219680}
-  _mouseMinDistance: 30
+  DAMAGE_SING: 4
+  DAMAGE_GUITAR: 25
+  _mouseMinDistance: 80
   _distanceFromCenterToMouseBoundaries: 0.167
   _linePrefab: {fileID: 8561030600004865903, guid: 30e22b6bf3f83334ca34b1f68f3274ad, type: 3}
   _canvas: {fileID: 878619629}
+  _joystickMarginValue: 0.2
+  _joystickResetMarginValue: 0.07
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0
@@ -5207,7 +5211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTempo: 1600
   hasStarted: 1
-  _spawnTimer: 1
+  _spawnMinTimer: 1.2
+  _spawnMaxTimer: 2
   _spawn1: {fileID: 451204157}
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
