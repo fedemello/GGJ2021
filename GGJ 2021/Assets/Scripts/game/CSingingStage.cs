@@ -213,6 +213,7 @@ public class CSingingStage : CStateBase
 
             //Left button
             mPressedLeftDrum = true;
+            _drumer.Amarillo();
 
             pressed = true;
         }
@@ -222,6 +223,7 @@ public class CSingingStage : CStateBase
 
             //Right button
             mPressedLeftDrum = false;
+            _drumer.Azul();
 
             pressed = true;
         }
@@ -297,6 +299,8 @@ public class CSingingStage : CStateBase
             {
                 Debug.Log("MIDDLE!");
 
+                _guitarrist.GuitarOff();
+
                 // stop any vibration.
                 mPlayerOne.StopVibration();
 
@@ -366,6 +370,8 @@ public class CSingingStage : CStateBase
 
             //Anim guitar -------------------------------------------------
 
+            _guitarrist.GuitarOn();
+
             // Send to proces.
             if (mCurrentDevice == DEVICE_JOYSTICK)
             {
@@ -400,6 +406,7 @@ public class CSingingStage : CStateBase
             else if (previousHighlight == DEVICE_JOYSTICK)
             {
                 _guitarrist.Off();
+                _guitarrist.GuitarOff();
                 CLineManager.Inst.BottomLineOff();
 
                 CAudioManager.Inst.setSfxVolume("guitar", _standardVolume);

@@ -21,4 +21,24 @@ public class CSinger : MonoBehaviour
     {
         _anim.SetBool("On", false);
     }
+
+    public void Azul()
+    {
+        _anim.SetTrigger("Azul");
+    }
+    
+    public void Amarillo()
+    {
+        _anim.SetTrigger("Amarillo");
+    }
+
+    public void GuitarOn()
+    {
+        _anim.SetBool("GuitarOn", true);
+    }
+
+    public void GuitarOff()
+    {
+        _anim.SetBool("GuitarOn", false);
+    }
 }

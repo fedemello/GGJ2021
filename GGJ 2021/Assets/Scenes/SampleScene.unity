@@ -2363,7 +2363,7 @@ MonoBehaviour:
   hasStarted: 1
   _spawnMinTimer: 1.2
   _spawnMaxTimer: 2
-  _cantidadMaxSpawn: 0
+  _cantidadMaxSpawn: 20
   _currentCantidadSpawn: 0
   _porcentajeParaSobrevivir: 50
   _valorParaBarra: 0

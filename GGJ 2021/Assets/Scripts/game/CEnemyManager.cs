@@ -78,9 +78,12 @@ public class CEnemyManager : MonoBehaviour
 
         Debug.Log("updating first enemy: " + _firstEnemy);
 
-        if (_firstEnemy._line == 2 && _firstEnemy._state == CEnemy._STATE_ON)
+        if (_firstEnemy != null)
         {
-            playEnemySfx();
+            if (_firstEnemy._line == 2 && _firstEnemy._state == CEnemy._STATE_ON)
+            {
+                playEnemySfx();
+            }
         }
     }
 
