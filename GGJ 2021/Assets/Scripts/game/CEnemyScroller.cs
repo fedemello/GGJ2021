@@ -12,12 +12,23 @@ public class CEnemyScroller : MonoBehaviour
     public float _spawnMinTimer;
     public float _spawnMaxTimer;
 
+    public int _cantidadMaxSpawn = 0;
+    public int _currentCantidadSpawn = 0;
+    public float _porcentajeParaSobrevivir = 50f;
+
+    public float _valorParaBarra;
+
+    private bool _winCondition = false;
+    private bool _loseCondition = false;
+
+    private int _puntajeMaximo;
+
 
     public Transform _spawn1;
     public Transform _spawn2;
     public Transform _spawn3;
 
-    private Vector3 _offset = new Vector3(0, 4, 0);
+    private Vector3 _offset = new Vector3(-40, 4, 0);
 
     private Coroutine _activeCoroutine;
 
@@ -27,7 +38,11 @@ public class CEnemyScroller : MonoBehaviour
     {
         beatTempo = beatTempo / 60f;
 
+        _puntajeMaximo = CScoreManager.Inst.getMaxScore();
+
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
+
+
     }
 
     // Update is called once per frame
@@ -45,6 +60,49 @@ public class CEnemyScroller : MonoBehaviour
             // Este movimiento se aplica a todos los enemigos simultaneamente
             //transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
         }
+
+        float puntaje = (float)CScoreManager.Inst._score / 50;
+        float cantEnemigosVivos = (float)CEnemyManager.Inst.cantEnemies();
+
+        float pointsRemaining = cantEnemigosVivos + (_cantidadMaxSpawn - _currentCantidadSpawn);
+
+        float minimunScoreToWin = (float)_cantidadMaxSpawn / 2;
+
+        //Debug.Log("Puntaje: " + punatje);
+        //Debug.Log("Cantidad Eniemigos Vivos: " + cantEnemigosVivos);
+        //Debug.Log("Puntos faltantes: " + pointsRemaining);
+        //Debug.Log("Minimo puntaje para ganar: " + minimunScoreToWin);
+
+        _valorParaBarra = (float)(puntaje + pointsRemaining - minimunScoreToWin) / (float)(_cantidadMaxSpawn);
+
+        if (_valorParaBarra <= 0)
+        {
+            _valorParaBarra = 0f;
+        }
+        else if (_valorParaBarra >= 1)
+        {
+            _valorParaBarra = 1f;
+        }
+
+        Debug.Log("Barra: " + _valorParaBarra);
+
+
+
+        if ((puntaje + pointsRemaining - minimunScoreToWin) <= 0)
+        {
+            _loseCondition = true;
+            Debug.Log("LOSE");
+        }
+        if (puntaje >= minimunScoreToWin)
+        {
+            _winCondition = true;
+            Debug.Log("WIN");
+        }
+
+
+
+
+
     }
 
     private IEnumerator SpawnCoroutine()
@@ -77,6 +135,11 @@ public class CEnemyScroller : MonoBehaviour
                 SpawnEnemy(_spawn3.position + _offset, 3, 49);
             }
 
+            _currentCantidadSpawn = _currentCantidadSpawn + 1;
+
+            if (_currentCantidadSpawn >= _cantidadMaxSpawn)
+                spawning = false;
+
             // Hack para convocar en una sola fila comentando los if de ran. 
             //SpawnEnemy(_spawn2.position + _offset, 2);
 
@@ -100,7 +163,7 @@ public class CEnemyScroller : MonoBehaviour
         GameObject enemy = GameObject.Instantiate(CEnemyManager.Inst._enemyAsset, pos, Quaternion.identity);
         enemy.transform.parent = this.transform;
         enemy.GetComponent<SpriteRenderer>().sortingOrder = sorting;
-        
+
         CEnemy enemyccc = enemy.GetComponent<CEnemy>();
         enemyccc.beatTempo = beatTempo;
 

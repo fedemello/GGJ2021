@@ -102,4 +102,9 @@ public class CScoreManager : MonoBehaviour
 
         return clasy;
     }
+
+    public int getMaxScore()
+    {
+        return _maxScore;
+    }
 }

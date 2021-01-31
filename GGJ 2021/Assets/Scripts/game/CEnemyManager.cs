@@ -53,7 +53,7 @@ public class CEnemyManager : MonoBehaviour
         }
     }
 
-    private void Update() 
+    private void Update()
     {
         //if (_firstEnemy == null)
         //    UpdateFirstEnemy();
@@ -61,7 +61,7 @@ public class CEnemyManager : MonoBehaviour
 
     private void UpdateFirstEnemy()
     {
-        for (int i = 0; i < _enemies.Count; i ++)
+        for (int i = 0; i < _enemies.Count; i++)
         {
             if (_firstEnemy == null)
             {
@@ -100,7 +100,6 @@ public class CEnemyManager : MonoBehaviour
     {
         return _firstEnemy;
     }
-
     public void playEnemySfx()
     {
         if (!CAudioManager.Inst.isSfxPlaying("enemy_audio"))
@@ -115,5 +114,10 @@ public class CEnemyManager : MonoBehaviour
         {
             CAudioManager.Inst.stopSfx("enemy_audio");
         }
+    }
+
+    public int cantEnemies()
+    {
+        return _enemies.Count;
     }
 }
