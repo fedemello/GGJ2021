@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CEnemyScroller : MonoBehaviour
 {
+    public CSingingStage _stage;
 
     public float beatTempo;
 
@@ -34,8 +35,11 @@ public class CEnemyScroller : MonoBehaviour
     private Coroutine _activeCoroutine;
 
     public CPlayerLifebar _playerScore;
+    public bool _ended = false;
 
-    private float mDeltaTime;
+    public float mDeltaTime;
+
+    public bool _startedCoroutine = false;
 
     public float _songLimitTime = 132;
 
@@ -64,6 +68,22 @@ public class CEnemyScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_startedCoroutine)
+        {
+            mDeltaTime += Time.deltaTime;
+        }
+
+        if (mDeltaTime >= _songLimitTime)
+        {   
+            if (!_ended)
+            {
+                _ended = true;
+
+                _stage.Ended();
+                Debug.Log("Dale gato");
+            }
+        }
+
         if (!hasStarted)
         {
             if (Input.anyKeyDown)
@@ -132,14 +152,12 @@ public class CEnemyScroller : MonoBehaviour
     {
         bool spawning = true;
 
-        mDeltaTime = 0;
+        _startedCoroutine = true;
 
         CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
 
         while (spawning)
         {
-            mDeltaTime += Time.deltaTime;
-
             if (mDeltaTime >= _songLimitTime)
             {
                 spawning = false;
