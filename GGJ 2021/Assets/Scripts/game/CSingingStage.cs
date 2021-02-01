@@ -13,6 +13,7 @@ public class CSingingStage : CStateBase
     public Transform _camera;
     public Vector3 _cameraInicialPos;
     public CIntro _intro;
+    public COutro _outro;
     public bool _endedIntro = false;
 
     // States.
@@ -137,6 +138,8 @@ public class CSingingStage : CStateBase
         else if (aState == STATE_ENDING)
         {
             Debug.Log("END!");
+
+            _outro.Credits();
 
             if (mPlayerOne != null)
             {
