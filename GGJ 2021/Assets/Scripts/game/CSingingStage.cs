@@ -204,12 +204,6 @@ public class CSingingStage : CStateBase
         }
         else if (mState == STATE_ENDING)
         {
-            _endingTime = _endingTime * Time.deltaTime;
-
-            if (_endingTime == 3)
-            {
-                setState(STATE_MENU);
-            }
 
         }
         else if (mState == STATE_MENU)
