@@ -196,6 +196,35 @@ public class CSingingStage : CStateBase
         }
         else if (mState == STATE_PLAYING)
         {
+            if (tutorialEnabled)
+            {
+                int enemyCount = CEnemyManager.Inst._enemyDeaths;
+
+                if (mCurrentTutorialStage == 1)
+                {
+                    if (enemyCount >= 3)
+                    {
+                        mCurrentTutorialStage = 2;
+                    }
+                }
+                else if (mCurrentTutorialStage == 2)
+                {
+                    if (enemyCount >= 6)
+                    {
+                        mCurrentTutorialStage = 3;
+                    }
+                }
+                else if (mCurrentTutorialStage == 3)
+                {
+                    if (enemyCount >= 9)
+                    {
+                        tutorialEnabled = false;
+                        setState(STATE_PLAYING);
+                        return;
+                    }
+                }
+            }
+
             // Check controllers
             checkControllerInput();
 

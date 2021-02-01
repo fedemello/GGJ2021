@@ -56,6 +56,7 @@ public class CEnemyScroller : MonoBehaviour
     {
         // Clear any current enemies.
         CEnemyManager.Inst.clearEnemies();
+        CEnemyManager.Inst.resetEnemyCounter();
 
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
