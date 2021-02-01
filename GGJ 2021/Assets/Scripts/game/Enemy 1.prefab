@@ -360,6 +360,8 @@ MonoBehaviour:
   _rightEyeSpr: {fileID: 2671015594567981181}
   _leftCol: {r: 0.9254902, g: 0.9490196, b: 0, a: 1}
   _rightCol: {r: 0, g: 0.5882353, b: 1, a: 1}
+  _explosion: {fileID: 8300000, guid: f21007037beb0cc4198ec0bdea5db232, type: 3}
+  _swift: {fileID: 8300000, guid: f6946a533bd7eb64e88ca0d636dc710c, type: 3}
 --- !u!61 &2132229439994423398
 BoxCollider2D:
   m_ObjectHideFlags: 0

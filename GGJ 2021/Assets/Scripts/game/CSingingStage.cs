@@ -18,8 +18,11 @@ public class CSingingStage : CStateBase
 
     // States.
     public const int STATE_INTRO = 0;
+    public const int STATE_MENU = 3;
     public const int STATE_PLAYING = 1;
     public const int STATE_ENDING = 2;
+
+    public bool tutorialEnabled = false;
 
     // Devices
     public const int DEVICE_MOUSE = 0;
@@ -94,12 +97,16 @@ public class CSingingStage : CStateBase
     public float _standardVolume = 0.2f;
     public float _highlightedVolume = 0.8f;
 
+
     public List<AudioClip> _drumSfx = new List<AudioClip>();
     public AudioClip _guitarIntro;
 
     private int mCurrentDrumSfx = 0;
 
     public AudioClip _singingMusic;
+
+    public float _endingTime;
+
 
     public override void init()
     {
@@ -151,6 +158,11 @@ public class CSingingStage : CStateBase
                 //Logic for after credits;
             }
         }
+        else if (aState == STATE_MENU)
+        {
+
+        }
+
     }
 
     public IEnumerator IntroCoroutine()
@@ -174,10 +186,11 @@ public class CSingingStage : CStateBase
             {
                 if (Input.anyKeyDown)
                 {
-                    setState(STATE_PLAYING);
+                    setState(STATE_MENU);
                     Destroy(_intro.gameObject);
                 }
             }
+
         }
         else if (mState == STATE_PLAYING)
         {
@@ -191,7 +204,36 @@ public class CSingingStage : CStateBase
         }
         else if (mState == STATE_ENDING)
         {
+            _endingTime = _endingTime * Time.deltaTime;
+
+            if (_endingTime == 3)
+            {
+                setState(STATE_MENU);
+            }
+
         }
+        else if (mState == STATE_MENU)
+        {
+            //presionar cualquier tecla
+
+            if (Input.anyKeyDown)
+            {
+                if (Input.GetKeyDown(KeyCode.T))
+                {
+                    tutorialEnabled = true;
+                    setState(STATE_PLAYING);
+                }
+                else
+                {
+                    setState(STATE_PLAYING);
+                }
+
+            }
+            
+
+                
+        }
+
     }
 
     public void checkControllerInput()
