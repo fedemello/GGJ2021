@@ -2587,7 +2587,7 @@ MonoBehaviour:
   _camera: {fileID: 519420032}
   _cameraInicialPos: {x: 0, y: 0, z: -10}
   _intro: {fileID: 1305341353}
-  _outro: {fileID: 0}
+  _outro: {fileID: 2080635333}
   _endedIntro: 0
   tutorialEnabled: 0
   DAMAGE_SING: 4
@@ -2611,6 +2611,7 @@ MonoBehaviour:
   _guitarIntro: {fileID: 8300000, guid: b1e23ec840fd5064095533daecc53e67, type: 3}
   _singingMusic: {fileID: 8300000, guid: b19c70d7edbbf6d46948d2075b03da42, type: 3}
   _endingTime: 0
+  _canExit: 0
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0
@@ -4326,6 +4327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b88e7e9d69a7c14480aabac41417af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stage: {fileID: 1210337399}
   beatTempo: 1600
   hasStarted: 1
   _spawnMinTimer: 1.2
@@ -4338,4 +4340,7 @@ MonoBehaviour:
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
   _playerScore: {fileID: 431944467}
+  _ended: 0
+  mDeltaTime: 0
+  _startedCoroutine: 0
   _songLimitTime: 132
