@@ -129,6 +129,8 @@ public class CEnemyScroller : MonoBehaviour
     {
         bool spawning = true;
 
+        
+
         while (spawning)
         {
             CStateBase state = CLevelManager.Inst.getCurrentState();
@@ -138,7 +140,46 @@ public class CEnemyScroller : MonoBehaviour
                 spawning = false;
             }
 
-            int ran = Random.Range(1, 4);
+            int ran = 0;
+
+            CSingingStage SS = CLevelManager.Inst.getCurrentState() as CSingingStage;
+
+            if (SS != null)
+            {
+                
+                if (SS.tutorialEnabled)
+                {
+                    ran = 2;
+
+                    if (_currentCantidadSpawn >= 3)
+                    {
+                        ran = 1;
+
+                        if (_currentCantidadSpawn >= 6)
+                        {
+                            ran = 3;
+
+
+                            if (_currentCantidadSpawn >= 9)
+                            {
+                                SS.tutorialEnabled = false;
+                            }
+
+                        }
+                        
+                    }
+                                                         
+                }
+                else
+                {
+                    ran = Random.Range(1, 4);
+                }
+
+            }
+            else
+            {
+               ran = Random.Range(1, 4);
+            }
 
             if (ran == 1)
             {
@@ -163,7 +204,18 @@ public class CEnemyScroller : MonoBehaviour
             // Hack para convocar en una sola fila comentando los if de ran. 
             //SpawnEnemy(_spawn2.position + _offset, 2);
 
-            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer));
+            int tutorialMultiplayer = 1;
+
+            if (SS != null)
+            {
+                if (SS.tutorialEnabled)
+                {
+                    tutorialMultiplayer = 2;
+                }
+            }                    
+
+
+            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer) * tutorialMultiplayer);
         }
 
         yield return null;
