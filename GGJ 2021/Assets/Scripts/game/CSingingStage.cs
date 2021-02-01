@@ -166,10 +166,14 @@ public class CSingingStage : CStateBase
             if (tutorialEnabled)
             {
                 CScoreManager.Inst._playerScore.gameObject.SetActive(false);
+                CScoreManager.Inst._scoreText.gameObject.SetActive(false);
+
             }
             else
             {
                 CScoreManager.Inst._playerScore.gameObject.SetActive(true);
+                CScoreManager.Inst._scoreText.gameObject.SetActive(true);
+
             }
         }
         else if (aState == STATE_ENDING)
