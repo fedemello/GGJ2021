@@ -61,6 +61,11 @@ public class CEnemyScroller : MonoBehaviour
         {
             mDeltaTime += Time.deltaTime;
         }
+
+        if (mDeltaTime >= _songLimitTime)
+        {
+            _stage.Ended();
+        }
     }
 
     private IEnumerator SpawnCoroutine()
