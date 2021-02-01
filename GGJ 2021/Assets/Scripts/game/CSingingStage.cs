@@ -24,6 +24,8 @@ public class CSingingStage : CStateBase
 
     public bool tutorialEnabled = false;
 
+    private int mCurrentTutorialStage = 1;
+
     // Devices
     public const int DEVICE_MOUSE = 0;
     public const int DEVICE_KEYBOARD = 1;
@@ -134,7 +136,7 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_PLAYING)
         {
-            CAudioManager.Inst.startMusic(_singingMusic);
+            CAudioManager.Inst.startMusic(_singingMusic, false);
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
@@ -560,9 +562,9 @@ public class CSingingStage : CStateBase
         //mLineTwo = Instantiate(_linePrefab, );
     }
 
-    public override void exitState()
+    public int getCurrentTutorialStage()
     {
-        base.exitState();
+        return mCurrentTutorialStage;
     }
 
 }

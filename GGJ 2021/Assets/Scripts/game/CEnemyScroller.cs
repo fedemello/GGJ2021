@@ -35,6 +35,10 @@ public class CEnemyScroller : MonoBehaviour
 
     public CPlayerLifebar _playerScore;
 
+    private float mDeltaTime;
+
+    public float _songLimitTime = 132;
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +54,9 @@ public class CEnemyScroller : MonoBehaviour
 
     public void Spawn()
     {
+        // Clear any current enemies.
+        CEnemyManager.Inst.clearEnemies();
+
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
@@ -89,7 +96,7 @@ public class CEnemyScroller : MonoBehaviour
 
         _valorParaBarra = CMath.lerp(minimunScoreToWin, maxScore, 0, 1, value);
 
-        Debug.Log("valor: " + _valorParaBarra);
+        //Debug.Log("valor: " + _valorParaBarra);
 
         //if (_valorParaBarra <= 0)
         //{
@@ -100,7 +107,7 @@ public class CEnemyScroller : MonoBehaviour
         //    _valorParaBarra = 1f;
         //}
 
-        Debug.Log("Barra: " + _valorParaBarra);
+        //Debug.Log("Barra: " + _valorParaBarra);
         _playerScore.setCurrentPercent(_valorParaBarra);
 
 
@@ -129,56 +136,45 @@ public class CEnemyScroller : MonoBehaviour
     {
         bool spawning = true;
 
-        
+        mDeltaTime = 0;
+
+        CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
 
         while (spawning)
         {
-            CStateBase state = CLevelManager.Inst.getCurrentState();
+            mDeltaTime += Time.deltaTime;
 
-            if (state != null && state.getState() == CSingingStage.STATE_ENDING)
+            if (mDeltaTime >= _songLimitTime)
             {
                 spawning = false;
             }
 
-            int ran = 0;
+            int ran = Random.Range(1, 4);
 
-            CSingingStage SS = CLevelManager.Inst.getCurrentState() as CSingingStage;
-
-            if (SS != null)
+            if (state != null)
             {
-                
-                if (SS.tutorialEnabled)
-                {
-                    ran = 2;
+                if (state.getState() == CSingingStage.STATE_ENDING)
+                {    
+                    spawning = false;
+                }
 
-                    if (_currentCantidadSpawn >= 3)
+                if (state.tutorialEnabled)
+                {
+                    int currentTutorial = state.getCurrentTutorialStage();
+
+                    if (currentTutorial == 1)
+                    {
+                        ran = 2;
+                    }
+                    else if (currentTutorial == 2)
                     {
                         ran = 1;
-
-                        if (_currentCantidadSpawn >= 6)
-                        {
-                            ran = 3;
-
-
-                            if (_currentCantidadSpawn >= 9)
-                            {
-                                SS.tutorialEnabled = false;
-                            }
-
-                        }
-                        
                     }
-                                                         
+                    else if (currentTutorial == 3)
+                    {
+                        ran = 3;
+                    }
                 }
-                else
-                {
-                    ran = Random.Range(1, 4);
-                }
-
-            }
-            else
-            {
-               ran = Random.Range(1, 4);
             }
 
             if (ran == 1)
@@ -196,27 +192,32 @@ public class CEnemyScroller : MonoBehaviour
                 SpawnEnemy(_spawn3.position + _offset, 3, 49);
             }
 
-            _currentCantidadSpawn = _currentCantidadSpawn + 1;
+            _currentCantidadSpawn += + 1;
 
-            if (_currentCantidadSpawn >= _cantidadMaxSpawn)
-                spawning = false;
+            //if (_currentCantidadSpawn >= _cantidadMaxSpawn)
+            //    spawning = false;
 
             // Hack para convocar en una sola fila comentando los if de ran. 
             //SpawnEnemy(_spawn2.position + _offset, 2);
 
-            int tutorialMultiplayer = 1;
+            //int tutorialMultiplayer = 1;
 
-            if (SS != null)
-            {
-                if (SS.tutorialEnabled)
-                {
-                    tutorialMultiplayer = 2;
-                }
-            }                    
+            //if (SS != null)
+            //{
+            //    if (SS.tutorialEnabled)
+            //    {
+            //        tutorialMultiplayer = 2;
+            //    }
+            //}                    
 
 
-            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer) * tutorialMultiplayer);
+            //yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer) * tutorialMultiplayer);
+            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer));
+
         }
+
+        Debug.Log("mDeltaTime: " + mDeltaTime);
+
 
         yield return null;
     }
