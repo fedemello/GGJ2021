@@ -40,9 +40,9 @@ public class CEnemyManager : MonoBehaviour
 
     }
 
-    public void resetEnemyCounter()
+    public void resetEnemyCounter(int count = 0)
     {
-        _enemyDeaths = 0;
+        _enemyDeaths = count;
     }
 
     public void addEnemy(CEnemy newEnemy)

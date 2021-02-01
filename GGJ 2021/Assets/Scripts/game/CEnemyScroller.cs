@@ -126,11 +126,6 @@ public class CEnemyScroller : MonoBehaviour
             _winCondition = true;
             Debug.Log("WIN");
         }
-
-
-
-
-
     }
 
     private IEnumerator SpawnCoroutine()

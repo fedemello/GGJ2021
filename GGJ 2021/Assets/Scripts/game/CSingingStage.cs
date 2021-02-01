@@ -134,6 +134,10 @@ public class CSingingStage : CStateBase
             
             updateHighlight(DEVICE_MOUSE);
         }
+        else if (aState == STATE_MENU)
+        {
+
+        }
         else if (aState == STATE_PLAYING)
         {
             CAudioManager.Inst.startMusic(_singingMusic, false);
@@ -160,11 +164,6 @@ public class CSingingStage : CStateBase
                 //Logic for after credits;
             }
         }
-        else if (aState == STATE_MENU)
-        {
-
-        }
-
     }
 
     public IEnumerator IntroCoroutine()
@@ -186,13 +185,26 @@ public class CSingingStage : CStateBase
 
             if (_endedIntro)
             {
-                if (Input.anyKeyDown)
-                {
-                    setState(STATE_MENU);
-                    Destroy(_intro.gameObject);
-                }
+                setState(STATE_MENU);
             }
 
+        }
+        else if (mState == STATE_MENU)
+        {
+            //presionar cualquier tecla
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                tutorialEnabled = true;
+
+                _intro.gameObject.SetActive(false);
+                setState(STATE_PLAYING);
+            }
+            else if (Input.anyKeyDown)
+            {
+                _intro.gameObject.SetActive(false);
+                setState(STATE_PLAYING);
+            }
         }
         else if (mState == STATE_PLAYING)
         {
@@ -205,18 +217,22 @@ public class CSingingStage : CStateBase
                     if (enemyCount >= 3)
                     {
                         mCurrentTutorialStage = 2;
+
+                        CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
                 else if (mCurrentTutorialStage == 2)
                 {
-                    if (enemyCount >= 6)
+                    if (enemyCount >= 3)
                     {
                         mCurrentTutorialStage = 3;
+
+                        CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
                 else if (mCurrentTutorialStage == 3)
                 {
-                    if (enemyCount >= 9)
+                    if (enemyCount >= 3)
                     {
                         tutorialEnabled = false;
                         setState(STATE_PLAYING);
@@ -236,27 +252,6 @@ public class CSingingStage : CStateBase
         else if (mState == STATE_ENDING)
         {
 
-        }
-        else if (mState == STATE_MENU)
-        {
-            //presionar cualquier tecla
-
-            if (Input.anyKeyDown)
-            {
-                if (Input.GetKeyDown(KeyCode.T))
-                {
-                    tutorialEnabled = true;
-                    setState(STATE_PLAYING);
-                }
-                else
-                {
-                    setState(STATE_PLAYING);
-                }
-
-            }
-            
-
-                
         }
 
     }
