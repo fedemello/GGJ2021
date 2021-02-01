@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b88e7e9d69a7c14480aabac41417af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stage: {fileID: 0}
+  _stage: {fileID: 1210337399}
   beatTempo: 1600
   _spawnMinTimer: 1.2
   _spawnMaxTimer: 2
@@ -4334,8 +4334,9 @@ MonoBehaviour:
   _spawn1: {fileID: 451204157}
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
-  _playerScore: {fileID: 0}
+  _playerScore: {fileID: 431944467}
   _ended: 0
   mDeltaTime: 0
   _startedCoroutine: 0
   _songLimitTime: 132
+  _tutorialTimer: 2.25

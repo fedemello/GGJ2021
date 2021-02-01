@@ -29,6 +29,8 @@ public class CEnemyScroller : MonoBehaviour
     public bool _startedCoroutine = false;
     public float _songLimitTime = 132;
 
+    public float _tutorialTimer = 1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,13 +44,23 @@ public class CEnemyScroller : MonoBehaviour
         CEnemyManager.Inst.clearEnemies();
         CEnemyManager.Inst.resetEnemyCounter();
 
+        _currentCantidadSpawn = 0;
+
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+        }
+
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (_startedCoroutine)
+        {
+            mDeltaTime += Time.deltaTime;
+        }
     }
 
     private IEnumerator SpawnCoroutine()
@@ -129,7 +141,7 @@ public class CEnemyScroller : MonoBehaviour
 
 
             //yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer) * tutorialMultiplayer);
-            yield return new WaitForSeconds(Random.Range(_spawnMinTimer, _spawnMaxTimer));
+            yield return new WaitForSeconds(state.tutorialEnabled ? _tutorialTimer : Random.Range(_spawnMinTimer, _spawnMaxTimer));
 
         }
 

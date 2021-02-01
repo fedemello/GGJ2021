@@ -74,6 +74,13 @@ public class CScoreManager : MonoBehaviour
     public void updateBarAndClassification()
     {
         // inicio min score final max score
+        CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
+
+        if (state != null && state.tutorialEnabled)
+        {
+            return;
+        }
+
         // de 0 a max score. 
 
         // Total de enemies.
@@ -88,7 +95,7 @@ public class CScoreManager : MonoBehaviour
         if (val <= 0)
         {
             Debug.Log("lost!");
-            CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
+            
 
             if (state != null)
             {

@@ -151,10 +151,9 @@ public class CSingingStage : CStateBase
                 CTutorial.Inst.SetState(CTutorial._STATE_BANSHEE_TEXT);
             }
 
-
+            CAudioManager.Inst.stopAllSfx();
 
             CAudioManager.Inst.startMusic(_singingMusic, false);
-
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
@@ -300,6 +299,7 @@ public class CSingingStage : CStateBase
                         tutorialEnabled = false;
 
                         CLocalData.inst().setBoolValue("tutorial_seen", true);
+                        _tutorialSeen = true;
 
                         setState(STATE_PLAYING);
                         return;

@@ -138,6 +138,10 @@ public class CEnemyManager : MonoBehaviour
         for (int i = _enemies.Count - 1; i >= 0; i--)
         {
             _enemies[i].Killed();
+            //Destroy(_enemies[i]);
+            //_enemies.RemoveAt(i);
+
+            //_enemies[i] = null;
         }
     }
 }
