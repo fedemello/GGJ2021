@@ -111,8 +111,6 @@ public class CSingingStage : CStateBase
 
     public bool _tutorialSeen = false;
 
-
-
     public override void init()
     {
         base.init();
@@ -154,6 +152,15 @@ public class CSingingStage : CStateBase
             CScoreManager.Inst.resetScore();
 
             _enemyScroller.Spawn();
+
+            if (tutorialEnabled)
+            {
+                CScoreManager.Inst._playerScore.gameObject.SetActive(false);
+            }
+            else
+            {
+                CScoreManager.Inst._playerScore.gameObject.SetActive(true);
+            }
         }
         else if (aState == STATE_ENDING)
         {
