@@ -140,6 +140,13 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_PLAYING)
         {
+            if (tutorialEnabled)
+            {
+                CTutorial.Inst.SetState(CTutorial._STATE_BANSHEE_TEXT);
+            }
+
+
+
             CAudioManager.Inst.startMusic(_singingMusic, false);
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
@@ -218,6 +225,8 @@ public class CSingingStage : CStateBase
                     {
                         mCurrentTutorialStage = 2;
 
+                        CTutorial.Inst.SetState(CTutorial._STATE_NOSFERATU_TEXT);
+
                         CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
@@ -227,6 +236,8 @@ public class CSingingStage : CStateBase
                     {
                         mCurrentTutorialStage = 3;
 
+                        CTutorial.Inst.SetState(CTutorial._STATE_ZOMBIEBOY_TEXT);
+
                         CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
@@ -234,6 +245,8 @@ public class CSingingStage : CStateBase
                 {
                     if (enemyCount >= 3)
                     {
+                        CTutorial.Inst.SetState(CTutorial._STATE_TEXT_DISABLED);
+
                         tutorialEnabled = false;
                         setState(STATE_PLAYING);
                         return;
