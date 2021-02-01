@@ -2477,6 +2477,7 @@ MonoBehaviour:
   _guitarIntro: {fileID: 8300000, guid: b1e23ec840fd5064095533daecc53e67, type: 3}
   _singingMusic: {fileID: 8300000, guid: b19c70d7edbbf6d46948d2075b03da42, type: 3}
   _endingTime: 0
+  _canExit: 0
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0
@@ -2626,6 +2627,7 @@ MonoBehaviour:
   _firstEnemy: {fileID: 0}
   _enemyAudio: {fileID: 8300000, guid: e816ef1de48e770459013ab512d26faf, type: 3}
   _enemyVolume: 1
+  _enemyDeaths: 0
 --- !u!4 &1302783813
 Transform:
   m_ObjectHideFlags: 0
@@ -4040,6 +4042,7 @@ MonoBehaviour:
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
   _playerScore: {fileID: 431944467}
+  _ended: 0
   mDeltaTime: 0
   _startedCoroutine: 0
-  _songLimitTime: 4
+  _songLimitTime: 132
