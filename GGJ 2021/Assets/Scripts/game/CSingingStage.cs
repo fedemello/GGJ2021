@@ -145,6 +145,11 @@ public class CSingingStage : CStateBase
             {
                 mPlayerOne.StopVibration();
             }
+
+            if (_outro._creditosEnded)
+            {
+                //Logic for after credits;
+            }
         }
     }
 
