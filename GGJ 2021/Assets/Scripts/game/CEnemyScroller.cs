@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CEnemyScroller : MonoBehaviour
 {
+    public CSingingStage _stage;
 
     public float beatTempo;
 
@@ -20,6 +21,12 @@ public class CEnemyScroller : MonoBehaviour
     private Vector3 _offset = new Vector3(-40, 4, 0);
 
     private Coroutine _activeCoroutine;
+    public CPlayerLifebar _playerScore;
+    public bool _ended = false;
+
+    public float mDeltaTime;
+
+    public bool _startedCoroutine = false;
 
     private float mDeltaTime;
 
@@ -44,8 +51,6 @@ public class CEnemyScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //Debug.Log("Barra: " + _valorParaBarra);
         
     }
 
@@ -53,14 +58,12 @@ public class CEnemyScroller : MonoBehaviour
     {
         bool spawning = true;
 
-        mDeltaTime = 0;
+        _startedCoroutine = true;
 
         CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
 
         while (spawning)
         {
-            mDeltaTime += Time.deltaTime;
-
             if (mDeltaTime >= _songLimitTime)
             {
                 spawning = false;

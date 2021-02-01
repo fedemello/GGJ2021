@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CSingingStage : CStateBase
 {
@@ -108,6 +109,7 @@ public class CSingingStage : CStateBase
     public AudioClip _singingMusic;
 
     public float _endingTime;
+    public bool _canExit = false;
 
     public bool _tutorialSeen = false;
 
@@ -143,7 +145,16 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_PLAYING)
         {
+
+            if (tutorialEnabled)
+            {
+                CTutorial.Inst.SetState(CTutorial._STATE_BANSHEE_TEXT);
+            }
+
+
+
             CAudioManager.Inst.startMusic(_singingMusic, false);
+
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
@@ -173,11 +184,38 @@ public class CSingingStage : CStateBase
                 mPlayerOne.StopVibration();
             }
 
-            if (_outro._creditosEnded)
-            {
-                //Logic for after credits;
-            }
+            StartCoroutine(WaintingCoroutine());
         }
+    }
+
+    private IEnumerator WaintingCoroutine()
+    {
+        yield return new WaitForSeconds(4f);
+
+        _canExit = true;
+
+        yield return null;
+    }
+
+    public void Ended()
+    {
+        StartCoroutine(OutroCoroutine());
+    }
+
+    public IEnumerator OutroCoroutine()
+    {
+        yield return new WaitForSeconds(9f);
+
+        CAudioManager.Inst.startMusic(_singingMusic, false);
+
+        yield return new WaitForSeconds(5f);
+
+        if (base.getState() != STATE_ENDING)
+        {
+            setState(STATE_ENDING);
+        }
+
+        yield return null;
     }
 
     public IEnumerator IntroCoroutine()
@@ -237,6 +275,8 @@ public class CSingingStage : CStateBase
                     {
                         mCurrentTutorialStage = 2;
 
+                        CTutorial.Inst.SetState(CTutorial._STATE_NOSFERATU_TEXT);
+
                         CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
@@ -246,6 +286,8 @@ public class CSingingStage : CStateBase
                     {
                         mCurrentTutorialStage = 3;
 
+                        CTutorial.Inst.SetState(CTutorial._STATE_ZOMBIEBOY_TEXT);
+
                         CEnemyManager.Inst.resetEnemyCounter(-CEnemyManager.Inst.cantEnemies());
                     }
                 }
@@ -253,6 +295,8 @@ public class CSingingStage : CStateBase
                 {
                     if (enemyCount >= 3)
                     {
+                        CTutorial.Inst.SetState(CTutorial._STATE_TEXT_DISABLED);
+
                         tutorialEnabled = false;
 
                         CLocalData.inst().setBoolValue("tutorial_seen", true);
@@ -273,7 +317,18 @@ public class CSingingStage : CStateBase
         }
         else if (mState == STATE_ENDING)
         {
-
+            if (_canExit)
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    SceneManager.LoadScene("SampleScene");
+                }
+                
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    Application.Quit();
+                }
+            }
         }
 
     }
