@@ -278,7 +278,22 @@ public class CEnemy : MonoBehaviour, ITriggered
         yield return new WaitForSeconds(1f);
 
         Destroy(this.gameObject);
-        CScoreManager.Inst.AddToScore();
+
+        CSingingStage SS = CLevelManager.Inst.getCurrentState() as CSingingStage;
+
+        if ( SS != null)
+        {
+            if (!(SS.tutorialEnabled))
+            {
+                CScoreManager.Inst.AddToScore();
+            }
+        }
+
+
+
+        
+
+        
 
         //Do something
 
