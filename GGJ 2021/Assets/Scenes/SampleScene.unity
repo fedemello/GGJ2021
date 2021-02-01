@@ -1057,8 +1057,8 @@ MonoBehaviour:
   PxToPxRatio: 5
   PixelClap: 0
   PixelsPerUnity: 1
-  PixelWidth: 0
-  PixelHeight: 0
+  PixelWidth: 384
+  PixelHeight: 216
   CurrentOrthographicSize: 0
   NativeOrthographicSize: 0
   SubPixelSnap: 0
@@ -2453,7 +2453,7 @@ MonoBehaviour:
   _camera: {fileID: 519420032}
   _cameraInicialPos: {x: 0, y: 0, z: -10}
   _intro: {fileID: 1305341353}
-  _outro: {fileID: 0}
+  _outro: {fileID: 2080635333}
   _endedIntro: 0
   tutorialEnabled: 0
   DAMAGE_SING: 4
@@ -3978,10 +3978,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.84, y: 2.16}
+  m_Size: {x: 384, y: 216}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2082221448
@@ -4027,6 +4027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b88e7e9d69a7c14480aabac41417af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stage: {fileID: 1210337399}
   beatTempo: 1600
   hasStarted: 1
   _spawnMinTimer: 1.2
@@ -4039,3 +4040,6 @@ MonoBehaviour:
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
   _playerScore: {fileID: 431944467}
+  mDeltaTime: 0
+  _startedCoroutine: 0
+  _songLimitTime: 4
