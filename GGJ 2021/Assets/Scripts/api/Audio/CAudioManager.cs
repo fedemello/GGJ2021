@@ -91,7 +91,7 @@ public class CAudioManager : MonoBehaviour
             return;
         }
 
-        createSfx(id, aSfx, _volumeSfx);
+        createSfx(id, aSfx, aVolume);
     }
 
     private void createSfx(string aId, AudioClip aSfx, float aVolume = 1)

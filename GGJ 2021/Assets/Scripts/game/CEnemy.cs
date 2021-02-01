@@ -58,6 +58,8 @@ public class CEnemy : MonoBehaviour, ITriggered
     public AudioClip _explosion;
     public AudioClip _swift;
 
+    private float _deathVolume = 0.2f;
+
     private void Awake() 
     {
         _anim = GetComponent<Animator>();
@@ -241,7 +243,7 @@ public class CEnemy : MonoBehaviour, ITriggered
             CEnemyManager.Inst.stopEnemySfx();
         }
 
-        CAudioManager.Inst.playSfx("self_destruct", _swift);
+        CAudioManager.Inst.playSfx("self_destruct", _swift, _deathVolume);
 
         SetMovementState(_STATE_DEATH);
         _anim.SetTrigger("Trigger3");
@@ -265,7 +267,7 @@ public class CEnemy : MonoBehaviour, ITriggered
             CEnemyManager.Inst.stopEnemySfx();
         }
 
-        CAudioManager.Inst.playSfx("explosion", _explosion);
+        CAudioManager.Inst.playSfx("explosion", _explosion, _deathVolume);
 
 
         SetMovementState(_STATE_DEATH);
