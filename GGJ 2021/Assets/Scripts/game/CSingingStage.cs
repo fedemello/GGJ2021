@@ -136,7 +136,7 @@ public class CSingingStage : CStateBase
         }
         else if (aState == STATE_PLAYING)
         {
-            CAudioManager.Inst.startMusic(_singingMusic);
+            CAudioManager.Inst.startMusic(_singingMusic, false);
 
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
