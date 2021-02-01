@@ -253,9 +253,9 @@ public class CEnemy : MonoBehaviour, ITriggered
         yield return new WaitForSeconds(1.3f);
 
         Destroy(this.gameObject);
-        CScoreManager.Inst.BrokeCombo();
 
         //Do something bad
+        CScoreManager.Inst.updateBarAndClassification();
 
         yield return null;
     }
@@ -285,7 +285,7 @@ public class CEnemy : MonoBehaviour, ITriggered
         {
             if (!(SS.tutorialEnabled))
             {
-                CScoreManager.Inst.AddToScore();
+                CScoreManager.Inst.AddToScore(50);
             }
         }
 

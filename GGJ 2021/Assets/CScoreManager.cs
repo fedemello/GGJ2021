@@ -6,15 +6,9 @@ using TMPro;
 
 public class CScoreManager : MonoBehaviour
 {
-    public TextMeshProUGUI _textScore;
-
-    public int _basicPoints;
-    public int _comboPoints;
-    public int _currentCombo = 0;
-    private int _endCombo = 100;
     public int _score;
+    private int _minScore;
     private int _maxScore;
-
 
     private int mCurrentClassification = -1;
 
@@ -23,6 +17,8 @@ public class CScoreManager : MonoBehaviour
     public SpriteRenderer _scoreText;
 
     public CEnemyScroller mScroller;
+
+    public CPlayerLifebar _playerScore;
 
     public static CScoreManager Inst
     {
@@ -46,18 +42,20 @@ public class CScoreManager : MonoBehaviour
         _inst = this;
     }
 
+    public void resetScore()
+    {
+        _score = 0;
+
+        _maxScore = mScroller._cantidadMaxSpawn * 50;
+
+        _minScore = _maxScore / 2;
+    }
+
     private void Update() 
     {
-        int clas = Classification();
 
 
-
-        if (mCurrentClassification != clas)
-        {
-            _scoreText.sprite = mScores[clas];
-
-            mCurrentClassification = clas;
-        }
+        
         //_textScore.text = ("Score: " + _score.ToString());
 
         //if(Input.GetKeyDown(KeyCode.W))
@@ -66,62 +64,79 @@ public class CScoreManager : MonoBehaviour
         //}
     }
 
-    public void AddToScore()
+    public void AddToScore(int score)
     {
-        _score += (_basicPoints + (_comboPoints * _currentCombo));
+        _score += score;
 
-        _currentCombo += 1;
+        updateBarAndClassification();
     }
 
-    public void BrokeCombo()
+    public void updateBarAndClassification()
     {
-        _currentCombo = 0;
+        // inicio min score final max score
+        // de 0 a max score. 
+
+        // Total de enemies.
+        int enemiesRemaining = mScroller._cantidadMaxSpawn - mScroller._currentCantidadSpawn + CEnemyManager.Inst.cantEnemies();
+
+        int posibleScore = enemiesRemaining * 50;
+
+        float val = CMath.lerp(_minScore, _maxScore, 0, 1, _score + posibleScore);
+
+        Debug.Log("val: " + val);
+
+        if (val <= 0)
+        {
+            Debug.Log("lost!");
+            CSingingStage state = CLevelManager.Inst.getCurrentState() as CSingingStage;
+
+            if (state != null)
+            {
+                state.notifyLoss();
+            }
+        }
+
+        //  _maxScore
+        _playerScore.setCurrentPercent(val);
+
+        int clas = getClassification(val);
+
+        if (mCurrentClassification != clas)
+        {
+            _scoreText.sprite = mScores[clas];
+
+            mCurrentClassification = clas;
+        }
     }
 
-    public void EndCombo()
+    public int getClassification(float val)
     {
-        _endCombo = _currentCombo;
-    }
+        //_maxScore = mScroller._cantidadMaxSpawn * 50;
 
-    public int Classification()
-    {
-        int clasy = 0;
-
-        _maxScore = mScroller._cantidadMaxSpawn * 50;
-
-        float percentaje = (_score * 100)/_maxScore;
-
-        if (_endCombo == _maxScore)
+        if (val <= 0.16f)
         {
-            clasy = 5;
+            return 0;
         }
-        
-        else if (percentaje >= 95)
+        else if (val <= 0.27f)
         {
-            clasy = 4;
-        } 
-        
-        else if (percentaje >= 90)
-        {
-            clasy = 3;
+            return 1;
         }
-
-        else if (percentaje >= 80)
+        else if (val <= 0.5f)
         {
-            clasy = 2;
+            return 2;
         }
-
-        else if (percentaje >= 70)
+        else if (val <= 0.66f)
         {
-            clasy = 1;
+            return 3;
         }
-
-        else if (percentaje >= 60)
+        else if (val <= 0.83f)
         {
-            clasy = 0;
+            return 4;
         }
-
-        return clasy;
+        else
+        {
+            return 5;
+        }
     }
 
     public int getMaxScore()

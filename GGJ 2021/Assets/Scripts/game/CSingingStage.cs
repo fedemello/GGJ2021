@@ -109,12 +109,17 @@ public class CSingingStage : CStateBase
 
     public float _endingTime;
 
+    public bool _tutorialSeen = false;
+
+
 
     public override void init()
     {
         base.init();
 
         _inputProcessing = new CProcessInput();
+
+        _tutorialSeen = CLocalData.inst().getBoolValue("tutorial_seen", false);
 
         createLines();
 
@@ -145,6 +150,8 @@ public class CSingingStage : CStateBase
             CAudioManager.Inst.playSfx("sing", _singing, _standardVolume);
             CAudioManager.Inst.playSfx("drum", _drums, _standardVolume);
             CAudioManager.Inst.playSfx("guitar", _guitar, _standardVolume);
+
+            CScoreManager.Inst.resetScore();
 
             _enemyScroller.Spawn();
         }
@@ -202,6 +209,11 @@ public class CSingingStage : CStateBase
             }
             else if (Input.anyKeyDown)
             {
+                if (!_tutorialSeen)
+                {
+                    tutorialEnabled = true;
+                }
+
                 _intro.gameObject.SetActive(false);
                 setState(STATE_PLAYING);
             }
@@ -235,6 +247,9 @@ public class CSingingStage : CStateBase
                     if (enemyCount >= 3)
                     {
                         tutorialEnabled = false;
+
+                        CLocalData.inst().setBoolValue("tutorial_seen", true);
+
                         setState(STATE_PLAYING);
                         return;
                     }
@@ -591,4 +606,10 @@ public class CSingingStage : CStateBase
         return mCurrentTutorialStage;
     }
 
+    public void notifyLoss()
+    {
+        Debug.Log("lost!");
+
+        setState(STATE_INTRO);
+    }
 }
