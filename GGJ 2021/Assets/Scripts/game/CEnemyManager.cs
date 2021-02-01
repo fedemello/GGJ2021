@@ -26,6 +26,8 @@ public class CEnemyManager : MonoBehaviour
 
     public float _enemyVolume;
 
+    public int _enemyDeaths = 0;
+
     private void Awake()
     {
         if (_inst != null && _inst != this)
@@ -36,6 +38,11 @@ public class CEnemyManager : MonoBehaviour
 
         _inst = this;
 
+    }
+
+    public void resetEnemyCounter(int count = 0)
+    {
+        _enemyDeaths = count;
     }
 
     public void addEnemy(CEnemy newEnemy)
@@ -89,6 +96,8 @@ public class CEnemyManager : MonoBehaviour
 
     public void ImOut(CEnemy it)
     {
+        _enemyDeaths += 1;
+
         _enemies.Remove(it);
 
         if (it == _firstEnemy)

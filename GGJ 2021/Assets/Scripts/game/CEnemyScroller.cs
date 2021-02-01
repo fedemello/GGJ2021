@@ -60,6 +60,7 @@ public class CEnemyScroller : MonoBehaviour
     {
         // Clear any current enemies.
         CEnemyManager.Inst.clearEnemies();
+        CEnemyManager.Inst.resetEnemyCounter();
 
         _activeCoroutine = StartCoroutine(SpawnCoroutine());
     }
@@ -145,11 +146,6 @@ public class CEnemyScroller : MonoBehaviour
             _winCondition = true;
             Debug.Log("WIN");
         }
-
-
-
-
-
     }
 
     private IEnumerator SpawnCoroutine()
