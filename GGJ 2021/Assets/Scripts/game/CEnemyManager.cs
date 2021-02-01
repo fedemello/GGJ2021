@@ -123,4 +123,13 @@ public class CEnemyManager : MonoBehaviour
     {
         return _enemies.Count;
     }
+
+    public void clearEnemies()
+    {
+        for (int i = _enemies.Count- 1; i >= 0; i--)
+        {
+            _enemies[i].Killed();
+            _enemies.RemoveAt(i);
+        }
+    }
 }

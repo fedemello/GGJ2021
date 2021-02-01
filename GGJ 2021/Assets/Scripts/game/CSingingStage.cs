@@ -23,6 +23,8 @@ public class CSingingStage : CStateBase
 
     public bool tutorialEnabled = false;
 
+    private int mCurrentTutorialStage = 1;
+
     // Devices
     public const int DEVICE_MOUSE = 0;
     public const int DEVICE_KEYBOARD = 1;
@@ -558,9 +560,9 @@ public class CSingingStage : CStateBase
         //mLineTwo = Instantiate(_linePrefab, );
     }
 
-    public override void exitState()
+    public int getCurrentTutorialStage()
     {
-        base.exitState();
+        return mCurrentTutorialStage;
     }
 
 }
