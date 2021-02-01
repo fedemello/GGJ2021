@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7543463237808540821, guid: 2198f9cb7e9b8594781a1768b58d33ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2198f9cb7e9b8594781a1768b58d33ff, type: 3}
@@ -374,10 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24554e4aa29e8b408e2739a29392d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textScore: {fileID: 0}
-  _basicPoints: 50
-  _comboPoints: 10
-  _currentCombo: 0
   _score: 0
   mScores:
   - {fileID: 21300000, guid: 63976adf7b772a14996a3c3d6ee8b2ef, type: 3}
@@ -388,6 +384,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 05517e0f13e7ce2478f223bdd25edf2c, type: 3}
   _scoreText: {fileID: 1166231991}
   mScroller: {fileID: 2082221450}
+  _playerScore: {fileID: 431944467}
 --- !u!1 &95552106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,7 +2406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 427}
+  m_AnchoredPosition: {x: -771, y: 427}
   m_SizeDelta: {x: 379.7, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1166231991
@@ -2612,6 +2609,7 @@ MonoBehaviour:
   _singingMusic: {fileID: 8300000, guid: b19c70d7edbbf6d46948d2075b03da42, type: 3}
   _endingTime: 0
   _canExit: 0
+  _tutorialSeen: 0
 --- !u!4 &1210337400
 Transform:
   m_ObjectHideFlags: 0
@@ -4327,19 +4325,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b88e7e9d69a7c14480aabac41417af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stage: {fileID: 1210337399}
+  _stage: {fileID: 0}
   beatTempo: 1600
-  hasStarted: 1
   _spawnMinTimer: 1.2
   _spawnMaxTimer: 2
   _cantidadMaxSpawn: 20
   _currentCantidadSpawn: 0
-  _porcentajeParaSobrevivir: 50
-  _valorParaBarra: 0
   _spawn1: {fileID: 451204157}
   _spawn2: {fileID: 628436439}
   _spawn3: {fileID: 115697072}
-  _playerScore: {fileID: 431944467}
+  _playerScore: {fileID: 0}
   _ended: 0
   mDeltaTime: 0
   _startedCoroutine: 0
