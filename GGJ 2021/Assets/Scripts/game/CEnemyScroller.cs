@@ -27,9 +27,6 @@ public class CEnemyScroller : MonoBehaviour
     public float mDeltaTime;
 
     public bool _startedCoroutine = false;
-
-    private float mDeltaTime;
-
     public float _songLimitTime = 132;
 
 
