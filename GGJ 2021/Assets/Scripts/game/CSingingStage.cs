@@ -676,6 +676,6 @@ public class CSingingStage : CStateBase
     {
         Debug.Log("lost!");
 
-        setState(STATE_INTRO);
+        //setState(STATE_INTRO);
     }
 }
