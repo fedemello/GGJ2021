@@ -211,7 +211,7 @@ public class CSingingStage : CStateBase
 
         CAudioManager.Inst.startMusic(_singingMusic, false);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         if (base.getState() != STATE_ENDING)
         {
